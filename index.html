@@ -1,66 +1,62 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello World</title>
-    <script src="https://telegram.org/js/telegram-web-app.js?57"></script>
+  <meta charset="UTF-8">
+  <title>Telegram Web App Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Подключение Telegram Web App JS (они будут доступны внутри клиента Telegram) -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    button {
+      font-size: 1rem;
+      padding: 10px 20px;
+      margin: 10px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-    <h1>Hello, Telegram!</h1>
-    
-    <form>
-        <h2>Вопрос:</h2>
-        <label>
-            <input type="checkbox" name="option1"> Ответ 1
-        </label><br>
-        <label>
-            <input type="checkbox" name="option2"> Ответ 2
-        </label><br>
-        <label>
-            <input type="checkbox" name="option3"> Ответ 3
-        </label><br>
-        <label>
-            <input type="checkbox" name="option4"> Ответ 4
-        </label><br>
-        <button type="submit">Сдать</button>
-    </form>
+  <h1>Telegram Web App Demo</h1>
+  <button id="mainButton">Главная кнопка</button>
+  <button id="backButton">Назад</button>
+
+  <script>
+    // Инициализация Telegram Web App
+    const tg = window.Telegram.WebApp;
+
+    // Включаем расширенный режим (если необходимо)
+    tg.expand();
+
+    // Устанавливаем текст для главной кнопки Telegram (как пример)
+    tg.MainButton.setText("Подтвердить");
+
+    // Обработчик для нашей локальной главной кнопки
+    document.getElementById("mainButton").addEventListener("click", function() {
+      // Пример действия: меняем текст главной кнопки Telegram и показываем её
+      tg.MainButton.setText("Отправлено!");
+      tg.MainButton.show();
+
+      // Можно добавить дальнейшую логику, например, отправку данных серверу или закрытие чата
+      // tg.sendData("Данные для отправки");
+    });
+
+    // Обработчик кнопки "Назад"
+    document.getElementById("backButton").addEventListener("click", function() {
+      // Пример действия: закрытие Web App
+      tg.close();
+      // Если необходимо, можно выполнить другую логику "назад"
+    });
+
+    // Пример обработчика нажатия на главную кнопку Telegram
+    tg.onEvent("mainButtonClicked", function(){
+      // Логика при нажатии на встроенную в Telegram главную кнопку
+      console.log("Нажата главная кнопка Telegram");
+    });
+  </script>
 </body>
-
-<script>
-
-    
-var WebApp = window.Telegram.WebApp;
-
-WebApp.showAlert(`Добро пожаловать, @${WebApp.WebAppUser.username}.`);
-
-var MainButton = WebApp.MainButton;
-var BackButton = WebApp.BackButton;
-
-MainButton.show();
-BackButton.show();
-
-MainButton.onClick(function() {
-  WebApp.showAlert("Хорошо, ты нажал на главную кнопку.");
-});
-WebApp.onEvent('mainButtonClicked', function() {
-  /* also */
-});
-
-BackButton.onClick(function() {
-  WebApp.showAlert("Нет пути назад!");
-  
-  BackButton.hide();
-});
-WebApp.onEvent('backButtonClicked', function() {
-  /* also */
-});
-
-
-    
-
-</script>
-
-
-    
 </html>
