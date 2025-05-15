@@ -34,29 +34,25 @@
 
     // Устанавливаем текст для главной кнопки Telegram (как пример)
     tg.MainButton.setText("Подтвердить");
+    tg.MainButton.show();
+    tg.BackButton.show();
 
-    // Обработчик для нашей локальной главной кнопки
-    document.getElementById("mainButton").addEventListener("click", function() {
-      // Пример действия: меняем текст главной кнопки Telegram и показываем её
-      tg.MainButton.setText("Отправлено!");
-      tg.MainButton.show();
 
-      // Можно добавить дальнейшую логику, например, отправку данных серверу или закрытие чата
-      // tg.sendData("Данные для отправки");
-    });
+    tg.MainButton.onClick(function() { 
+      tg.showAlert("Хорошо, ты нажал на главную кнопку.");
+});
+    tg.onEvent('mainButtonClicked', function() {
+  /* also */
+});
 
-    // Обработчик кнопки "Назад"
-    document.getElementById("backButton").addEventListener("click", function() {
-      // Пример действия: закрытие Web App
-      tg.close();
-      // Если необходимо, можно выполнить другую логику "назад"
-    });
-
-    // Пример обработчика нажатия на главную кнопку Telegram
-    tg.onEvent("mainButtonClicked", function(){
-      // Логика при нажатии на встроенную в Telegram главную кнопку
-      console.log("Нажата главная кнопка Telegram");
-    });
+tg.BackButton.onClick(function() {
+  tg.showAlert("Нет пути назад!");
+  
+  BackButton.hide();
+});
+tg.onEvent('backButtonClicked', function() {
+  /* also */
+});
   </script>
 </body>
 </html>
