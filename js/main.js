@@ -8,10 +8,10 @@ tg.sendData(data);
 
 
 // Óñòàíàâëèâàåì òåêñò äëÿ ãëàâíîé êíîïêè Telegram (êàê ïðèìåð)
-tg.MainButton.setText("Íà÷àòü òåñò");
+tg.MainButton.setText("Начать тест");
 tg.MainButton.show();
 
-tg.SecondaryButton.setText("Î òåñòå");
+tg.SecondaryButton.setText("О тесте");
 tg.SecondaryButton.position = "top"
 tg.SecondaryButton.show();
 
@@ -44,12 +44,12 @@ tg.ready()
 
 
 tg.MainButton.onClick(function () {
-    tg.showAlert("Õîðîøî, òû íàæàë íà ãëàâíóþ êíîïêó è áîòó îòïðàâèëèñü äàííûå");
-    tg.sendData("Õîðîøî, òû íàæàë íà ãëàâíóþ êíîïêó è áîòó îòïðàâèëèñü äàííûå");
+    tg.showAlert("Хорошо, ты нажал на главную кнопку и боту отправились данные");
+    tg.sendData("Хорошо, ты нажал на главную кнопку и боту отправились данные");
 });
 
 tg.SecondaryButton.onClick(function () {
-    tg.showAlert("Î òåñòå...");
+    tg.showAlert("О тесте...");
 });
 
 
