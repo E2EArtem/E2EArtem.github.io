@@ -4,7 +4,7 @@ const tg = window.Telegram.WebApp;
 // Âêëþ÷àåì ðàñøèðåííûé ðåæèì (åñëè íåîáõîäèìî)
 tg.expand();
 
-tg.sendData(data); 
+
 
 
 // Óñòàíàâëèâàåì òåêñò äëÿ ãëàâíîé êíîïêè Telegram (êàê ïðèìåð)
