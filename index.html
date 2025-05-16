@@ -68,8 +68,7 @@
         }
 
         hr {
-            border: 1px dashed var(--tg-theme-hint-color);
-            ;
+            border: 1px var(--tg-theme-hint-color);
         }
 
 
@@ -117,29 +116,10 @@
 <body>
     <div class="main">
 
-        <h1 id="QE">Вопрос 1</h1>
-
-        <hr>
-
-        <div class="checkbox-container">
-            <div class="checkbox-grid">
-                <label class="checkbox-item" for="cb1">
-                    <input type="checkbox" id="cb1" name="option1" value="1">
-                    <span class="checkbox-label">Опция 1</span>
-                </label>
-                <label class="checkbox-item" for="cb2">
-                    <input type="checkbox" id="cb2" name="option2" value="2">
-                    <span class="checkbox-label">Опция 2</span>
-                </label>
-                <label class="checkbox-item" for="cb3">
-                    <input type="checkbox" id="cb3" name="option3" value="3">
-                    <span class="checkbox-label">Опция 3</span>
-                </label>
-                <label class="checkbox-item" for="cb4">
-                    <input type="checkbox" id="cb4" name="option4" value="4">
-                    <span class="checkbox-label">Опция 4</span>
-                </label>
-            </div>
+        <div id="DynamicContainer">
+            <h1 id="QE">Тестирование</h1>
+            <hr>
+            <div>Для начала теста нажмите Начать тест</div>
         </div>
 
     </div>
@@ -157,14 +137,126 @@
 
 
         // Устанавливаем текст для главной кнопки Telegram (как пример)
+
         tg.MainButton.setText("Начать тест");
         tg.MainButton.show();
 
+        router = 0;
+
 
         tg.MainButton.onClick(function () {
-            tg.showAlert("Хорошо, ты нажал на главную кнопку");
-           
+            //tg.showAlert("Хорошо, ты нажал на главную кнопку");
+            
+            if (router == 0) {
+                tg.BackButton.show();
+                tg.MainButton.setText("Далее");
+            }
+            if (router == templates.length) {
+                tg.MainButton.setText("Начать тест");
+                tg.BackButton.hide();
+                document.getElementById('myContainer').innerHTML = templates[0];
+                router = 0;
+                return;
+            }
+            
+            document.getElementById('myContainer').innerHTML = templates[router + 1];
+            router = router + 1;
+            
         });
+
+
+
+
+        tg.BackButton.onClick(function () {
+            tg.MainButton.setText("Начать тест");
+            tg.BackButton.hide();
+            document.getElementById('myContainer').innerHTML = templates[0];
+            router = 0;
+        });
+
+
+
+        const templates = [
+            `
+        <h1 id="QE">Тестирование</h1>
+        <hr>
+        <div>Для начала теста нажмите Начать тест</div>
+  `,
+            `
+<h1 id="QE">Вопрос 1</h1>
+<hr>
+<div class="checkbox-container">
+    <div class="checkbox-grid">
+        <label class="checkbox-item" for="cb1">
+            <input type="checkbox" id="cb1" name="option1" value="1">
+            <span class="checkbox-label">Опция 1</span>
+        </label>
+        <label class="checkbox-item" for="cb2">
+            <input type="checkbox" id="cb2" name="option2" value="2">
+            <span class="checkbox-label">Опция 2</span>
+        </label>
+        <label class="checkbox-item" for="cb3">
+            <input type="checkbox" id="cb3" name="option3" value="3">
+            <span class="checkbox-label">Опция 3</span>
+        </label>
+        <label class="checkbox-item" for="cb4">
+            <input type="checkbox" id="cb4" name="option4" value="4">
+            <span class="checkbox-label">Опция 4</span>
+        </label>
+    </div>
+</div>
+`, `
+<h1 id="QE">Вопрос 2</h1>
+<hr>
+<div class="checkbox-container">
+    <div class="checkbox-grid">
+        <label class="checkbox-item" for="cb1">
+            <input type="checkbox" id="cb1" name="option1" value="1">
+            <span class="checkbox-label">Answer 1</span>
+        </label>
+        <label class="checkbox-item" for="cb2">
+            <input type="checkbox" id="cb2" name="option2" value="2">
+            <span class="checkbox-label">Answer 2</span>
+        </label>
+        <label class="checkbox-item" for="cb3">
+            <input type="checkbox" id="cb3" name="option3" value="3">
+            <span class="checkbox-label">Answer 3</span>
+        </label>
+        <label class="checkbox-item" for="cb4">
+            <input type="checkbox" id="cb4" name="option4" value="4">
+            <span class="checkbox-label">Answer 4</span>
+        </label>
+    </div>
+</div>
+`, `
+<h1 id="QE">Вопрос 3</h1>
+<hr>
+<div class="checkbox-container">
+    <div class="checkbox-grid">
+        <label class="checkbox-item" for="cb1">
+            <input type="checkbox" id="cb1" name="option1" value="1">
+            <span class="checkbox-label">Ответ 1</span>
+        </label>
+        <label class="checkbox-item" for="cb2">
+            <input type="checkbox" id="cb2" name="option2" value="2">
+            <span class="checkbox-label">Ответ 2</span>
+        </label>
+        <label class="checkbox-item" for="cb3">
+            <input type="checkbox" id="cb3" name="option3" value="3">
+            <span class="checkbox-label">Ответ 3</span>
+        </label>
+        <label class="checkbox-item" for="cb4">
+            <input type="checkbox" id="cb4" name="option4" value="4">
+            <span class="checkbox-label">Ответ 4</span>
+        </label>
+    </div>
+</div>
+`
+        ];
+
+
+
+
 
 
 
