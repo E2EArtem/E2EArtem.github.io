@@ -154,12 +154,12 @@
             if (router == templates.length) {
                 tg.MainButton.setText("Начать тест");
                 tg.BackButton.hide();
-                document.getElementById('myContainer').innerHTML = templates[0];
+                document.getElementById('DynamicContainer').innerHTML = templates[0];
                 router = 0;
                 return;
             }
             
-            document.getElementById('myContainer').innerHTML = templates[router + 1];
+            document.getElementById('DynamicContainer').innerHTML = templates[router + 1];
             router = router + 1;
             
         });
@@ -170,7 +170,7 @@
         tg.BackButton.onClick(function () {
             tg.MainButton.setText("Начать тест");
             tg.BackButton.hide();
-            document.getElementById('myContainer').innerHTML = templates[0];
+            document.getElementById('DynamicContainer').innerHTML = templates[0];
             router = 0;
         });
 
