@@ -11,6 +11,32 @@
     
     <div id="myContainer"></div>
 
-    <script src="js/main.js"></script>
+    <script>
+
+
+        const tg = window.Telegram.WebApp;
+
+        // Включаем расширенный режим (если необходимо)
+        tg.expand();
+
+
+
+        // Устанавливаем текст для главной кнопки Telegram (как пример)
+        tg.MainButton.setText("Начать тест");
+        tg.MainButton.show();
+        tg.SecondaryButton.show();
+
+        tg.SecondaryButton.setText("О тесте");
+        tg.SecondaryButton.position = "top"
+
+        if (tg.SecondaryButton.isSupported()) {
+            tg.showAlert("Поддерживается");
+        } else {
+            tg.showAlert("Не поддерживается");
+        }
+
+    </script>
+
+
 </body>
 </html>
