@@ -1,45 +1,51 @@
-// Èíèöèàëèçàöèÿ Telegram Web App
+// Инициализация Telegram Web App
 const tg = window.Telegram.WebApp;
 
-// Âêëþ÷àåì ðàñøèðåííûé ðåæèì (åñëè íåîáõîäèìî)
+// Включаем расширенный режим (если необходимо)
 tg.expand();
 
 
 
-
-// Óñòàíàâëèâàåì òåêñò äëÿ ãëàâíîé êíîïêè Telegram (êàê ïðèìåð)
+// Устанавливаем текст для главной кнопки Telegram (как пример)
 tg.MainButton.setText("Начать тест");
 tg.MainButton.show();
+tg.SecondaryButton.show();
 
 tg.SecondaryButton.setText("О тесте");
-tg.SecondaryButton.position = "top";
-tg.SecondaryButton.show();
-tg.SecondaryButton.isVisible = true;
+tg.SecondaryButton.position = "top"
+tg.SecondaryButton.isVisible = true
+
+if (tg.SecondaryButton.isSupported()) {
+    tg.showAlert("Поддерживается");
+} else {
+    tg.showAlert("Не поддерживается");
+}
+
 
 
 function updateContent(html_file) {
-  fetch(html_file)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Ошибка сети');
-      }
-      return response.text();
-    })
-    .then(data => {
-      // Обновляем содержимое контейнера
-      document.getElementById('myContainer').innerHTML = data;
-    })
-    .catch(error => {
-      console.error('Произошла ошибка при загрузке:', error);
-      document.getElementById('myContainer').innerHTML = '<p>Ошибка загрузки содержимого</p>';
-    });
+    fetch(html_file)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Ошибка сети');
+            }
+            return response.text();
+        })
+        .then(data => {
+            // Обновляем содержимое контейнера
+            document.getElementById('myContainer').innerHTML = data;
+        })
+        .catch(error => {
+            console.error('Произошла ошибка при загрузке:', error);
+            document.getElementById('myContainer').innerHTML = '<p>Ошибка загрузки содержимого</p>';
+        });
 }
 
 updateContent('content1.html')
 
 
 
-// Ïîñûëàåì ãîòîâíîñòü ê îòîáðàæåíèþ èíòåðôåéñà â êëèåíòå
+// Посылаем готовность к отображению интерфейса в клиенте
 tg.ready()
 
 
