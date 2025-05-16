@@ -6,10 +6,128 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Подключение Telegram Web App JS (они будут доступны внутри клиента Telegram) -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--tg-theme-text-color);
+            background: var(--tg-theme-bg-color);
+        }
+
+        .main {
+            width: 100%;
+            padding: 25px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 40px;
+            margin-bottom: 10px;
+        }
+
+        img {
+            width: 70px;
+            margin: 30px auto;
+        }
+
+        .btn {
+            border: 0;
+            border-radius: 5px;
+            margin-top: 50px;
+            height: 60px;
+            width: 200px;
+            font-style: 20px;
+            font-weight: 500;
+            cursor: pointer;
+            color: var(--tg-theme-button-text-color);
+            background: var(--tg-theme-button-color);
+        }
+
+        form {
+            text-align: center;
+        }
+
+        input {
+            outline: none;
+            border-radius: 5px;
+            border: 2px solid var(--tg-theme-button-color);
+            padding: 15px 10px;
+            margin: 10px 0 0;
+            background: var(--tg-theme-section-separator-color);
+            color: var(--tg-theme-text-color);
+            transition: all .2s;
+        }
+
+        input:focus {
+            border-color: var(--tg-theme-secondary-bg-color)
+        }
+
+        hr {
+            border: 1px dashed var(--tg-theme-hint-color);
+            ;
+        }
+
+
+
+        .checkbox-container {
+            width: 100%;
+            background-color: #f0f0f0; /* Задайте нужный цвет фона */
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        /* Стили для сетки (2 столбца) */
+        .checkbox-grid {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .checkbox-item {
+            flex: 0 0 50%; /* Ширина 50% для двух столбцов */
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px; /* Отступ между строками */
+        }
+
+        .checkbox-item input {
+            margin-right: 5px; /* Отступ между чекбоксом и текстом */
+        }
+
+
+
+    </style>
 </head>
 <body>
-    
-    <div id="myContainer"></div>
+    <div class="main">
+
+        <h1 id="QE">Вопрос 1</h1>
+
+        <hr>
+
+        <div class="checkbox-container">
+            <div class="checkbox-grid">
+                <label class="checkbox-item">
+                    <input type="checkbox" name="option1" value="1"> Опция 1
+                </label>
+                <label class="checkbox-item">
+                    <input type="checkbox" name="option2" value="2"> Опция 2
+                </label>
+                <label class="checkbox-item">
+                    <input type="checkbox" name="option3" value="3"> Опция 3
+                </label>
+                <label class="checkbox-item">
+                    <input type="checkbox" name="option4" value="4"> Опция 4
+                </label>
+            </div>
+        </div>
+
+    </div>
+
+
 
     <script>
 
@@ -24,20 +142,14 @@
         // Устанавливаем текст для главной кнопки Telegram (как пример)
         tg.MainButton.setText("Начать тест");
         tg.MainButton.show();
-        tg.SecondaryButton.show();
-
-        tg.SecondaryButton.setText("О тесте");
-        tg.SecondaryButton.position = "top"
 
 
         tg.MainButton.onClick(function () {
-            tg.showAlert("Хорошо, ты нажал на главную кнопку и боту отправились данные");
-            tg.sendData("Хорошо, ты нажал на главную кнопку и боту отправились данные");
+            tg.showAlert("Хорошо, ты нажал на главную кнопку");
+           
         });
 
-        tg.SecondaryButton.onClick(function () {
-            tg.showAlert("О тесте...");
-        });
+
 
     </script>
 
