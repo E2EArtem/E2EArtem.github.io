@@ -76,25 +76,38 @@
 
         .checkbox-container {
             width: 100%;
-            background-color: #f0f0f0; /* Задайте нужный цвет фона */
             padding: 10px;
             box-sizing: border-box;
         }
-        /* Стили для сетки (2 столбца) */
+        /* Сетка для 2 столбцов */
         .checkbox-grid {
             display: flex;
             flex-wrap: wrap;
+            gap: 10px;
         }
-
+        /* Элемент каждого чекбокса, теперь используется <label> */
         .checkbox-item {
-            flex: 0 0 50%; /* Ширина 50% для двух столбцов */
+            width: calc(50% - 10px);
+            background-color: var(--tg-theme-secondary-bg-color);
+            padding: 10px;
+            box-sizing: border-box;
             display: flex;
             align-items: center;
-            margin-bottom: 8px; /* Отступ между строками */
+            cursor: pointer;
+            border-radius: 4px; /* Если нужен border-radius для всего блока */
         }
-
-        .checkbox-item input {
-            margin-right: 5px; /* Отступ между чекбоксом и текстом */
+            /* Стилизация чекбокса */
+        .checkbox-item input[type="checkbox"] {
+            transform: scale(1.5);
+            margin: auto;
+            border: 1px solid var(--tg-theme-hint-color);
+            /* Убираем лишние стили браузера для абсолютного контроля (опционально) */
+            cursor: pointer;
+        }
+        /* Текст, выровненный по центру */
+        .checkbox-label {
+            flex-grow: 1;
+            text-align: center;
         }
 
 
@@ -110,17 +123,21 @@
 
         <div class="checkbox-container">
             <div class="checkbox-grid">
-                <label class="checkbox-item">
-                    <input type="checkbox" name="option1" value="1"> Опция 1
+                <label class="checkbox-item" for="cb1">
+                    <input type="checkbox" id="cb1" name="option1" value="1">
+                    <span class="checkbox-label">Опция 1</span>
                 </label>
-                <label class="checkbox-item">
-                    <input type="checkbox" name="option2" value="2"> Опция 2
+                <label class="checkbox-item" for="cb2">
+                    <input type="checkbox" id="cb2" name="option2" value="2">
+                    <span class="checkbox-label">Опция 2</span>
                 </label>
-                <label class="checkbox-item">
-                    <input type="checkbox" name="option3" value="3"> Опция 3
+                <label class="checkbox-item" for="cb3">
+                    <input type="checkbox" id="cb3" name="option3" value="3">
+                    <span class="checkbox-label">Опция 3</span>
                 </label>
-                <label class="checkbox-item">
-                    <input type="checkbox" name="option4" value="4"> Опция 4
+                <label class="checkbox-item" for="cb4">
+                    <input type="checkbox" id="cb4" name="option4" value="4">
+                    <span class="checkbox-label">Опция 4</span>
                 </label>
             </div>
         </div>
