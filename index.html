@@ -21,39 +21,9 @@
   </style>
 </head>
 <body>
-  <h1>Telegram Web App Demo</h1>
 
+    <div id="myContainer"></div>
 
-  <script>
-    // Инициализация Telegram Web App
-    const tg = window.Telegram.WebApp;
-
-    // Включаем расширенный режим (если необходимо)
-    tg.expand();
-
-    // Устанавливаем текст для главной кнопки Telegram (как пример)
-    tg.MainButton.setText("Главная кнопка");
-    tg.MainButton.show();
-    tg.BackButton.show();
-    tg.SecondaryButton.setText("Вторая кнопка");
-    tg.SecondaryButton.show();
-
-
-    tg.MainButton.onClick(function() { 
-      tg.showAlert("Хорошо, ты нажал на главную кнопку.");
-});
-    tg.onEvent('mainButtonClicked', function() {
-  /* also */
-});
-
-tg.BackButton.onClick(function() {
-  tg.showAlert("Нет пути назад!");
-  
-  tg.BackButton.hide();
-});
-tg.onEvent('backButtonClicked', function() {
-  /* also */
-});
-  </script>
+    <script src="js/main.js"></script>
 </body>
 </html>
