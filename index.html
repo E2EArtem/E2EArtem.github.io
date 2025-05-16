@@ -35,6 +35,16 @@
             tg.showAlert("Не поддерживается");
         }
 
+
+        tg.MainButton.onClick(function () {
+            tg.showAlert("Хорошо, ты нажал на главную кнопку и боту отправились данные");
+            tg.sendData("Хорошо, ты нажал на главную кнопку и боту отправились данные");
+        });
+
+        tg.SecondaryButton.onClick(function () {
+            tg.showAlert("О тесте...");
+        });
+
     </script>
 
 
