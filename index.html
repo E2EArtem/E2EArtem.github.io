@@ -68,7 +68,7 @@
         }
 
         hr {
-            border: 1px var(--tg-theme-hint-color);
+            border: 1px solid var(--tg-theme-hint-color);
         }
 
 
@@ -151,7 +151,7 @@
                 tg.BackButton.show();
                 tg.MainButton.setText("Далее");
             }
-            if (router == templates.length) {
+            if (router == (templates.length-1)) {
                 tg.MainButton.setText("Начать тест");
                 tg.BackButton.hide();
                 document.getElementById('DynamicContainer').innerHTML = templates[0];
