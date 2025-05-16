@@ -12,9 +12,9 @@ tg.MainButton.setText("Начать тест");
 tg.MainButton.show();
 
 tg.SecondaryButton.setText("О тесте");
-tg.SecondaryButton.position = "top"
+tg.SecondaryButton.position = "top";
 tg.SecondaryButton.show();
-
+tg.SecondaryButton.isVisible = true;
 
 
 function updateContent(html_file) {
