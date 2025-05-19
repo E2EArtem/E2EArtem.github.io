@@ -233,7 +233,7 @@
                 tg.MainButton.setText("Далее");
                 document.getElementById('DynamicContainer').innerHTML = templates[1];
             }
-            if (router == (templates.length - 1)) {
+            if (router == (10)) {
                 tg.MainButton.setText("Начать тест");
                 tg.BackButton.hide();
                 document.getElementById('DynamicContainer').innerHTML = templates[0];
@@ -241,11 +241,11 @@
                 return;
             }
 
-
-            document.getElementById('QE').innerHTML = dataobject[router].question;
-            document.getElementById('an1txt').innerHTML = dataobject[router].first;
-            document.getElementById('an2txt').innerHTML = dataobject[router].second;
-            document.getElementById('an3txt').innerHTML = dataobject[router].third;
+            let randomNumber = Math.floor(Math.random() * (50 - 0) + 0);
+            document.getElementById('QE').innerHTML = dataobject[randomNumber].question;
+            document.getElementById('an1txt').innerHTML = dataobject[randomNumber].first;
+            document.getElementById('an2txt').innerHTML = dataobject[randomNumber].second;
+            document.getElementById('an3txt').innerHTML = dataobject[randomNumber].third;
 
 
             router = router + 1;
