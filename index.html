@@ -195,8 +195,6 @@
                 header: true, // если CSV содержит строку заголовков
                 dynamicTyping: true, // автоматически преобразует числовые значения в числа
                 complete: function (results) {
-                    console.log("Parsed Results: ", results.data[5].second);
-                    console.log("Parsed Results: ", results.data[15].question);
                     dataobject = results.data;
                 },
                 error: function (err) {
@@ -243,10 +241,15 @@
                 return;
             }
 
+            tg.showAlert("q");
             document.getElementById('QE').innerHTML = dataobject[router].question;
+            tg.showAlert("a1");
             document.getElementById('an1txt').innerHTML = dataobject[router].first;
+            tg.showAlert(dataobject[router].first);
             document.getElementById('an2txt').innerHTML = dataobject[router].second;
+            tg.showAlert("a3");
             document.getElementById('an3txt').innerHTML = dataobject[router].third;
+            tg.showAlert("a4");
 
 
             router = router + 1;
