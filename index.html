@@ -143,25 +143,7 @@
         router = 0;
 
 
-        tg.MainButton.onClick(function () {
-            //tg.showAlert("Хорошо, ты нажал на главную кнопку");
-
-            if (router == 0) {
-                tg.BackButton.show();
-                tg.MainButton.setText("Далее");
-            }
-            if (router == (templates.length - 1)) {
-                tg.MainButton.setText("Начать тест");
-                tg.BackButton.hide();
-                document.getElementById('DynamicContainer').innerHTML = templates[0];
-                router = 0;
-                return;
-            }
-
-            document.getElementById('DynamicContainer').innerHTML = templates[router + 1];
-            router = router + 1;
-
-        });
+        
 
 
 
@@ -186,17 +168,17 @@
   <hr>
   <div class="checkbox-container">
     <div class="checkbox-grid">
-      <label class="checkbox-item" for="cb1">
+      <label class="checkbox-item" for="an1">
         <input type="checkbox" id="an1" name="option1" value="1">
-        <span class="checkbox-label">Ответ 1</span>
+        <span class="checkbox-label id="an1txt"">Ответ 1</span>
       </label>
-      <label class="checkbox-item" for="cb2">
+      <label class="checkbox-item" for="an2">
         <input type="checkbox" id="an2" name="option2" value="2">
-        <span class="checkbox-label">Ответ 2</span>
+        <span class="checkbox-label id="an2txt"">Ответ 2</span>
       </label>
-      <label class="checkbox-item" for="cb3">
+      <label class="checkbox-item" for="an3">
         <input type="checkbox" id="an3" name="option3" value="3">
-        <span class="checkbox-label">Ответ 3</span>
+        <span class="checkbox-label id="an3txt">Ответ 3</span>
       </label>
     </div>
   </div>
@@ -205,6 +187,7 @@
 
 
         const csvURL = 'questions.csv';
+        let dataobject;
 
         // Функция для обработки загруженного CSV с помощью PapaParse
         function parseCSV(data) {
@@ -212,9 +195,9 @@
                 header: true, // если CSV содержит строку заголовков
                 dynamicTyping: true, // автоматически преобразует числовые значения в числа
                 complete: function (results) {
-                    console.log("Parsed Results: ", results.data[5].Option2);
-                    console.log("Parsed Results: ", results.data[15].Question);
-                    
+                    console.log("Parsed Results: ", results.data[5].second);
+                    console.log("Parsed Results: ", results.data[15].question);
+                    dataobject = results.data;
                 },
                 error: function (err) {
                     console.error("Ошибка парсинга: ", err);
@@ -244,7 +227,31 @@
 
 
 
+        tg.MainButton.onClick(function () {
+            //tg.showAlert("Хорошо, ты нажал на главную кнопку");
 
+            if (router == 0) {
+                tg.BackButton.show();
+                tg.MainButton.setText("Далее");
+                document.getElementById('DynamicContainer').innerHTML = templates[1];
+            }
+            if (router == (templates.length - 1)) {
+                tg.MainButton.setText("Начать тест");
+                tg.BackButton.hide();
+                document.getElementById('DynamicContainer').innerHTML = templates[0];
+                router = 0;
+                return;
+            }
+
+            document.getElementById('QE').innerHTML = dataobject[router].question;
+            document.getElementById('an1txt').innerHTML = dataobject[router].first;
+            document.getElementById('an2txt').innerHTML = dataobject[router].second;
+            document.getElementById('an3txt').innerHTML = dataobject[router].third;
+
+
+            router = router + 1;
+
+        });
 
 
     </script>
