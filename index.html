@@ -258,24 +258,25 @@
                     console.log(i);
                     if (i == rightanswer - 1) { // если проверяем чекбокс с правильным ответом, он болжен быть true
                         if (chboxs[i] != true) {
-                            console.log("Попало в ветку 1");
                             tg.showAlert("Выбранный вами ответ не верный");
-                            tg.MainButton.setText("Начать тест");
-                            tg.BackButton.hide();
-                            document.getElementById('DynamicContainer').innerHTML = templates[0];
-                            router = 0;
-                            return;
+                            if (trening == false) {
+                                tg.MainButton.setText("Начать тест");
+                                tg.BackButton.hide();
+                                document.getElementById('DynamicContainer').innerHTML = templates[0];
+                                router = 0;
+                                return;
+                            }
                         }
                     } else { // иначе false
                         if (chboxs[i] == true) {
-                            console.log("Попало в ветку 2");
-                            console.log(i);
                             tg.showAlert("Выбранный вами ответ не верный");
-                            tg.MainButton.setText("Начать тест");
-                            tg.BackButton.hide();
-                            document.getElementById('DynamicContainer').innerHTML = templates[0];
-                            router = 0;
-                            return;
+                            if (trening == false) {
+                                tg.MainButton.setText("Начать тест");
+                                tg.BackButton.hide();
+                                document.getElementById('DynamicContainer').innerHTML = templates[0];
+                                router = 0;
+                                return;
+                            }
                         }
                     }
                 }
