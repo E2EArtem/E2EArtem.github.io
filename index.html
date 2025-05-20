@@ -29,6 +29,7 @@
         h1 {
             margin-top: 40px;
             margin-bottom: 10px;
+            font-size: large;
         }
 
         img {
@@ -70,6 +71,8 @@
 
         hr {
             border: 1px solid var(--tg-theme-hint-color);
+            margin-top: 10px;
+            margin-bottom: 10px;
         }
 
 
@@ -96,6 +99,7 @@
             align-items: center;
             cursor: pointer;
             border-radius: 4px; /* Если нужен border-radius для всего блока */
+            width: auto;
         }
             /* Стилизация чекбокса */
             .checkbox-item input[type="checkbox"] {
@@ -108,7 +112,9 @@
         /* Текст, выровненный по центру */
         .checkbox-label {
             flex-grow: 1;
-            text-align: center;
+            text-align: left;
+            padding-left: 15px;
+            font-size: medium;
         }
     </style>
 </head>
@@ -140,7 +146,8 @@
         tg.MainButton.setText("Начать тест");
         tg.MainButton.show();
 
-        router = 0;
+        let router = 0;
+        let trening = false;
 
 
         
@@ -162,6 +169,7 @@
             <h1 id="QE">ТЕОРЕТИЧЕСКИЕ ВОПРОСЫ С ОТВЕТАМИ ДЛЯ ПРОВЕДЕНИЯ ТЕОРЕТИЧЕСКОЙ ЧАСТИ ИТОГОВОЙ АТТЕСТАЦИИ И ПРОВЕРКИ ЗНАНИЯ ПРАВИЛ БЕЗОПАСНОГО ОБРАЩЕНИЯ С ОРУЖИЕМ</h1>
             <hr>
             <div>Для начала теста нажмите Начать тест</div>
+            <div><a href="#" onclick="Trening(); return false;">Тренировка</a></div>
       `,
             `
 <h1 id="QE">Вопрос 1</h1>
@@ -268,10 +276,13 @@
                     }
                 }
 
+                document.getElementById('an1').checked = false;
+                document.getElementById('an1').checked = false;
+                document.getElementById('an1').checked = false;
 
 
             }
-            if (router == (10)) {
+            if ((router == 10) && (trening == false)) {
                 tg.showAlert("Поздравляем, вы успешно сдали тест!");
                 tg.MainButton.setText("Начать тест");
                 tg.BackButton.hide();
@@ -296,8 +307,16 @@
 
 
             router = router + 1;
+            
 
         });
+
+
+        function Trening() {
+            trening = true;
+            tg.MainButton.onClick();
+        }
+
 
 
     </script>
