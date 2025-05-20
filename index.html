@@ -194,7 +194,7 @@
 `
         ];
 
-        document.getElementById('DynamicContainer').innerHTML = templates[0];
+
         const csvURL = 'questions.csv';
         let dataobject;
 
@@ -234,7 +234,7 @@
 
         let rightanswer = 0;
 
-        tg.MainButton.onClick(MBC());
+        tg.MainButton.onClick(MBC);
 
 
         function MBC() {
@@ -324,7 +324,7 @@
             MBC();
         }
 
-
+        document.getElementById('DynamicContainer').innerHTML = templates[0];
 
     </script>
 
