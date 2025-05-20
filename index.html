@@ -133,6 +133,7 @@
 
     <script>
 
+        document.getElementById('DynamicContainer').innerHTML = templates[0];
 
         const tg = window.Telegram.WebApp;
 
@@ -233,7 +234,10 @@
 
         let rightanswer = 0;
 
-        tg.MainButton.onClick(function () {
+        tg.MainButton.onClick(MBC());
+
+
+        function MBC() {
             //tg.showAlert("Хорошо, ты нажал на главную кнопку");
 
             if (router == 0) { // Если мы переходим с начальной страницы - отображаем вопросы
@@ -277,8 +281,8 @@
                 }
 
                 document.getElementById('an1').checked = false;
-                document.getElementById('an1').checked = false;
-                document.getElementById('an1').checked = false;
+                document.getElementById('an2').checked = false;
+                document.getElementById('an3').checked = false;
 
 
             }
@@ -300,21 +304,24 @@
 
 
 
-            
+
 
 
 
 
 
             router = router + 1;
-            
 
-        });
+
+        }
+
+
+
 
 
         function Trening() {
             trening = true;
-            tg.MainButton.onClick();
+            MBC();
         }
 
 
