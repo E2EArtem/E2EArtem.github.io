@@ -17,7 +17,7 @@
         body {
             font-family: 'Inter', sans-serif;
             color: var(--tg-theme-text-color);
-            background: var(--tg-theme-bg-color);
+            background: var(--tg-theme-secondary-bg-color);
         }
 
         .main {
@@ -71,15 +71,23 @@
 
         hr {
             border: 1px solid var(--tg-theme-hint-color);
-            margin-top: 10px;
-            margin-bottom: 10px;
+            margin-top: 20px;
+            margin-bottom: 20px;
         }
 
         a {
             margin-top: 10px;
             margin-bottom: 10px;
             color: var(--tg-theme-link-color);
+            text-decoration: none;
         }
+
+        .section {
+            background: var(--tg-theme-bg-color);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        
 
 
 
@@ -98,13 +106,13 @@
         /* Элемент каждого чекбокса, теперь используется <label> */
         .checkbox-item {
             width: calc(50% - 10px);
-            background-color: var(--tg-theme-secondary-bg-color);
-            padding: 10px;
+            background-color: var(--tg-theme-button-color);
+            padding: 12px;
             box-sizing: border-box;
             display: flex;
             align-items: center;
             cursor: pointer;
-            border-radius: 4px; /* Если нужен border-radius для всего блока */
+            border-radius: 10px; /* Если нужен border-radius для всего блока */
             width: auto;
         }
             /* Стилизация чекбокса */
@@ -121,6 +129,7 @@
             text-align: left;
             padding-left: 15px;
             font-size: medium;
+            color: var(--tg-theme-button-text-color);
         }
     </style>
 </head>
@@ -174,14 +183,19 @@
 
         const templates = [
             `
+            <div class="section">
             <h1 id="QE">ТЕОРЕТИЧЕСКИЕ ВОПРОСЫ С ОТВЕТАМИ ДЛЯ ПРОВЕДЕНИЯ ТЕОРЕТИЧЕСКОЙ ЧАСТИ ИТОГОВОЙ АТТЕСТАЦИИ И ПРОВЕРКИ ЗНАНИЯ ПРАВИЛ БЕЗОПАСНОГО ОБРАЩЕНИЯ С ОРУЖИЕМ</h1>
+            </div>
             <hr>
+            <div class="section">
             <div>Для начала теста нажмите Начать тест</div>
-            <div><a href="#" onclick="Trening(); return false;">Тренировка&gt</a></div>
+            <div><a href="#" onclick="Trening(); return false;">Тренировка&#8250;</a></div>
+            </div>
       `,
             `
 <h1 id="QE">Вопрос 1</h1>
   <hr>
+  <div class="section">
   <div class="checkbox-container">
     <div class="checkbox-grid">
       <label class="checkbox-item" for="an1">
@@ -197,6 +211,7 @@
         <span class="checkbox-label" id="an3txt">Ответ 3</span>
       </label>
     </div>
+  </div>
   </div>
 `
         ];
