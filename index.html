@@ -106,7 +106,7 @@
         /* Элемент каждого чекбокса, теперь используется <label> */
         .checkbox-item {
             width: calc(50% - 10px);
-            background-color: var(--tg-theme-button-color);
+            /*background-color: var(--tg-theme-button-color);*/
             padding: 12px;
             box-sizing: border-box;
             display: flex;
@@ -115,14 +115,17 @@
             border-radius: 10px; /* Если нужен border-radius для всего блока */
             width: auto;
         }
+        .checkbox-item:hover {
+            background-color: var(--tg-theme-secondary-bg-color);
+        }
             /* Стилизация чекбокса */
-            .checkbox-item input[type="checkbox"] {
-                transform: scale(1.5);
-                margin: auto;
-                border: 1px solid var(--tg-theme-hint-color);
-                /* Убираем лишние стили браузера для абсолютного контроля (опционально) */
-                cursor: pointer;
-            }
+        .checkbox-item input[type="checkbox"] {
+            transform: scale(1.5);
+            margin: auto;
+            border: 1px solid var(--tg-theme-hint-color);
+            /* Убираем лишние стили браузера для абсолютного контроля (опционально) */
+            cursor: pointer;
+        }
         /* Текст, выровненный по центру */
         .checkbox-label {
             flex-grow: 1;
@@ -189,7 +192,7 @@
             <hr>
             <div class="section">
             <div>Для начала теста нажмите Начать тест</div>
-            <div><a href="#" onclick="Trening(); return false;">Тренировка&#8250;</a></div>
+            <div><a href="#" onclick="Trening(); return false;">Тренировка</a></div>
             </div>
       `,
             `
