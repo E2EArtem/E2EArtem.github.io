@@ -118,9 +118,7 @@
             border-radius: 10px; /* Если нужен border-radius для всего блока */
             width: auto;
         }
-        .checkbox-item:hover {
-            background-color: var(--tg-theme-secondary-bg-color);
-        }
+        
             /* Стилизация чекбокса */
         .checkbox-item input[type="checkbox"] {
             transform: scale(1.5);
@@ -160,6 +158,16 @@
         // Включаем расширенный режим (если необходимо)
         tg.expand();
 
+        if (tg.platform == "web" || tg.platform == "tdesktop") {
+            const stylestr = document.createElement('style');
+            stylestr.textContent = `
+        .checkbox-item:hover {
+        background-color: var(--tg-theme-secondary-bg-color);
+}
+`;
+            document.head.append(stylestr);
+        }
+
 
 
         // Устанавливаем текст для главной кнопки Telegram (как пример)
@@ -182,6 +190,7 @@
             document.getElementById('DynamicContainer').innerHTML = templates[0];
             router = 0;
             trening = false;
+            tg.MainButton.show();
         });
 
 
@@ -206,19 +215,28 @@
   <div class="checkbox-container">
     <div class="checkbox-grid">
       <label class="checkbox-item" for="an1">
-        <input type="checkbox" id="an1" name="option1" value="1">
+        <input type="radio" id="an1" name="option1" value="1">
         <span class="checkbox-label" id="an1txt">Ответ 1</span>
       </label>
       <label class="checkbox-item" for="an2">
-        <input type="checkbox" id="an2" name="option2" value="2">
+        <input type="radio" id="an2" name="option2" value="2">
         <span class="checkbox-label" id="an2txt">Ответ 2</span>
       </label>
       <label class="checkbox-item" for="an3">
-        <input type="checkbox" id="an3" name="option3" value="3">
+        <input type="radio" id="an3" name="option3" value="3">
         <span class="checkbox-label" id="an3txt">Ответ 3</span>
       </label>
     </div>
   </div>
+  </div>
+`,
+            `
+    <div class="section">
+    <h1>Тестирование завершено</h1>
+    </div>
+  <hr>
+  <div class="section">
+        <div id="result"></div>
   </div>
 `
         ];
@@ -262,6 +280,7 @@
         downloadCSV(csvURL);
 
         let rightanswer = 0;
+        let mistakecounter = 0;
 
         tg.MainButton.onClick(MBC);
 
@@ -319,12 +338,20 @@
 
             }
             if ((router == 10) && (trening == false)) {
-                tg.showAlert("Поздравляем, вы успешно сдали тест!");
+                /*tg.showAlert("Поздравляем, вы успешно сдали тест!");
                 tg.MainButton.setText("Начать тест");
                 tg.BackButton.hide();
                 document.getElementById('DynamicContainer').innerHTML = templates[0];
                 router = 0;
-                return;
+                return;*/
+
+                document.getElementById('DynamicContainer').innerHTML = templates[2];
+                document.getElementById('result').innerHTML = `Вы ${mistakecounter < 2 ? "Вы сдали тест" : "Вы НЕ сдали тест"}
+                ${10 - mistakecounter} правильных ответа из 10`;
+                mistakecounter = 0;
+                router = 0;
+                tg.MainButton.hide();
+
             }
 
             let randomNumber = Math.floor(Math.random() * (50 - 0) + 0);
@@ -333,6 +360,7 @@
             document.getElementById('an2txt').innerHTML = dataobject[randomNumber].second;
             document.getElementById('an3txt').innerHTML = dataobject[randomNumber].third;
             rightanswer = dataobject[randomNumber].answer;
+
 
 
 
