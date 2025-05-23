@@ -419,7 +419,7 @@
                 answeredquestions.push(randomNumber);
             }
 
-            questionstring = dataobject[randomNumber].index.toString() + dataobject[randomNumber].question;
+            questionstring = "Вопрос №" + dataobject[randomNumber].index.toString() + "<br>" + dataobject[randomNumber].question;
             document.getElementById('QE').innerHTML = questionstring;
             document.getElementById('an1txt').innerHTML = dataobject[randomNumber].first;
             document.getElementById('an2txt').innerHTML = dataobject[randomNumber].second;
