@@ -411,16 +411,16 @@
             }
 
             
-            let randomNumber = Math.floor(Math.random() * (50 - 0) + 0);
+            let randomNumber = Math.floor(Math.random() * (65 - 0) + 0);
             if (trening == false) {
                 while (answeredquestions.indexOf(randomNumber) != -1) {
-                    randomNumber = Math.floor(Math.random() * (50 - 0) + 0);
+                    randomNumber = Math.floor(Math.random() * (65 - 0) + 0);
                 }
                 answeredquestions.push(randomNumber);
             }
-            
 
-            document.getElementById('QE').innerHTML = dataobject[randomNumber].question;
+            questionstring = dataobject[randomNumber].index.toString() + dataobject[randomNumber].question;
+            document.getElementById('QE').innerHTML = questionstring;
             document.getElementById('an1txt').innerHTML = dataobject[randomNumber].first;
             document.getElementById('an2txt').innerHTML = dataobject[randomNumber].second;
             document.getElementById('an3txt').innerHTML = dataobject[randomNumber].third;
