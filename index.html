@@ -127,6 +127,13 @@
             /* Убираем лишние стили браузера для абсолютного контроля (опционально) */
             cursor: pointer;
         }
+        .checkbox-item input[type="radio"] {
+            transform: scale(1.5);
+            margin: auto;
+            border: 1px solid var(--tg-theme-hint-color);
+            /* Убираем лишние стили браузера для абсолютного контроля (опционально) */
+            cursor: pointer;
+        }
         /* Текст, выровненный по центру */
         .checkbox-label {
             flex-grow: 1;
@@ -154,6 +161,8 @@
         
 
         const tg = window.Telegram.WebApp;
+
+        const singlechoice = true;
 
         // Включаем расширенный режим (если необходимо)
         tg.expand();
@@ -231,6 +240,29 @@
     </div>
   </div>
   </div>
+`, `
+    <div class="section">
+    <h1 id="QE">Вопрос 1</h1>
+    </div>
+  <hr>
+  <div class="section">
+  <div class="checkbox-container">
+    <div class="checkbox-grid">
+      <label class="checkbox-item" for="an1">
+        <input type="checkbox" id="an1" name="option1" value="1">
+        <span class="checkbox-label" id="an1txt">Ответ 1</span>
+      </label>
+      <label class="checkbox-item" for="an2">
+        <input type="checkbox" id="an2" name="option2" value="2">
+        <span class="checkbox-label" id="an2txt">Ответ 2</span>
+      </label>
+      <label class="checkbox-item" for="an3">
+        <input type="checkbox" id="an3" name="option3" value="3">
+        <span class="checkbox-label" id="an3txt">Ответ 3</span>
+      </label>
+    </div>
+  </div>
+  </div>
 `,
             `
     <div class="section">
@@ -294,7 +326,7 @@
             if (router == 0) { // Если мы переходим с начальной страницы - отображаем вопросы
                 tg.BackButton.show();
                 tg.MainButton.setText("Далее");
-                document.getElementById('DynamicContainer').innerHTML = templates[1];
+                document.getElementById('DynamicContainer').innerHTML = singlechoice ? templates[1] : templates[2];
             } else { // иначе считываем ответы
                 let chboxs = [document.getElementById('an1').checked, document.getElementById('an2').checked, document.getElementById('an3').checked];
                 console.log("1");
@@ -341,7 +373,7 @@
                 router = 0;
                 return;*/
 
-                document.getElementById('DynamicContainer').innerHTML = templates[2];
+                document.getElementById('DynamicContainer').innerHTML = templates[3];
                 document.getElementById('result').innerHTML = `Вы ${mistakecounter < 2 ? "сдали тест" : "НЕ сдали тест"} \nПравильных ответов: ${10 - mistakecounter} из 10`;
                 mistakecounter = 0;
                 router = 0;
