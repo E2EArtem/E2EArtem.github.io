@@ -191,6 +191,7 @@
             router = 0;
             trening = false;
             tg.MainButton.show();
+            mistakecounter = 0;
         });
 
 
@@ -304,30 +305,26 @@
                 for (let i = 0; i < 3; i++) {
                     console.log("Разбираем чекбокс");
                     console.log(i);
+                    let mistake = false;
                     if (i == rightanswer - 1) { // если проверяем чекбокс с правильным ответом, он болжен быть true
                         if (chboxs[i] != true) {
-                            tg.showAlert("Выбранный вами ответ не верный");
                             if (trening == false) {
-                                tg.MainButton.setText("Начать тест");
-                                tg.BackButton.hide();
-                                document.getElementById('DynamicContainer').innerHTML = templates[0];
-                                router = 0;
-                                trening = false;
-                                return;
+                                mistake = true;
+                            } else {
+                                tg.showAlert("Выбранный вами ответ не верный");
                             }
                         }
-                    } else { // иначе false
+                    } else { // иначе он должен быть false
                         if (chboxs[i] == true) {
-                            tg.showAlert("Выбранный вами ответ не верный");
                             if (trening == false) {
-                                tg.MainButton.setText("Начать тест");
-                                tg.BackButton.hide();
-                                document.getElementById('DynamicContainer').innerHTML = templates[0];
-                                router = 0;
-                                trening = false;
-                                return;
+                                mistake = true;
+                            } else {
+                                tg.showAlert("Выбранный вами ответ не верный");
                             }
                         }
+                    }
+                    if (mistake == true) {
+                        mistakecounter = mistakecounter + 1;
                     }
                 }
 
@@ -346,8 +343,7 @@
                 return;*/
 
                 document.getElementById('DynamicContainer').innerHTML = templates[2];
-                document.getElementById('result').innerHTML = `Вы ${mistakecounter < 2 ? "Вы сдали тест" : "Вы НЕ сдали тест"}
-                Правильных ответов: ${10 - mistakecounter} из 10`;
+                document.getElementById('result').innerHTML = `Вы ${mistakecounter < 2 ? "сдали тест" : "НЕ сдали тест"} \nПравильных ответов: ${10 - mistakecounter} из 10`;
                 mistakecounter = 0;
                 router = 0;
                 tg.MainButton.hide();
