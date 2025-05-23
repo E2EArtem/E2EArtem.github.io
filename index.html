@@ -301,11 +301,11 @@
                 console.log("Правильный ответ");
                 console.log(rightanswer);
 
-
+                let mistake = false;
                 for (let i = 0; i < 3; i++) {
                     console.log("Разбираем чекбокс");
                     console.log(i);
-                    let mistake = false;
+                    
                     if (i == rightanswer - 1) { // если проверяем чекбокс с правильным ответом, он болжен быть true
                         if (chboxs[i] != true) {
                             if (trening == false) {
@@ -322,10 +322,10 @@
                                 tg.showAlert("Выбранный вами ответ не верный");
                             }
                         }
-                    }
-                    if (mistake == true) {
-                        mistakecounter = mistakecounter + 1;
-                    }
+                    }   
+                }
+                if (mistake == true) {
+                    mistakecounter = mistakecounter + 1;
                 }
 
                 document.getElementById('an1').checked = false;
