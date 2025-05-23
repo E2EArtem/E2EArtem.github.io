@@ -203,6 +203,7 @@
             mistakecounter = 0;
             answeredquestions = [];
             tg.MainButton.enable()
+            tg.MainButton.color = tg.themeParams.button_color
         });
 
 
@@ -326,6 +327,7 @@
             // Если есть хотя бы один выбранный ответ
             if (chboxs.indexOf(true) != -1) {
                 tg.MainButton.enable()
+                tg.MainButton.color = tg.themeParams.button_color
             }
         }
         
@@ -335,7 +337,10 @@
             if (router == 0) { // Если мы переходим с начальной страницы - отображаем вопросы
                 tg.BackButton.show();
                 tg.MainButton.setText("Далее");
-                tg.MainButton.isActive = false;
+
+                tg.MainButton.disable()
+                tg.MainButton.color = tg.themeParams.hint_color
+
                 document.getElementById('DynamicContainer').innerHTML = singlechoice ? templates[1] : templates[2];
 
                 const radios = [];
@@ -421,6 +426,7 @@
             document.getElementById('an3txt').innerHTML = dataobject[randomNumber].third;
             rightanswer = dataobject[randomNumber].answer;
             tg.MainButton.disable()
+            tg.MainButton.color = tg.themeParams.hint_color
 
             router = router + 1;
         }
