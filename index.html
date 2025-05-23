@@ -215,15 +215,15 @@
   <div class="checkbox-container">
     <div class="checkbox-grid">
       <label class="checkbox-item" for="an1">
-        <input type="radio" id="an1" name="option1" value="1">
+        <input type="checkbox" id="an1" name="option1" value="1">
         <span class="checkbox-label" id="an1txt">Ответ 1</span>
       </label>
       <label class="checkbox-item" for="an2">
-        <input type="radio" id="an2" name="option2" value="2">
+        <input type="checkbox" id="an2" name="option2" value="2">
         <span class="checkbox-label" id="an2txt">Ответ 2</span>
       </label>
       <label class="checkbox-item" for="an3">
-        <input type="radio" id="an3" name="option3" value="3">
+        <input type="checkbox" id="an3" name="option3" value="3">
         <span class="checkbox-label" id="an3txt">Ответ 3</span>
       </label>
     </div>
@@ -347,7 +347,7 @@
 
                 document.getElementById('DynamicContainer').innerHTML = templates[2];
                 document.getElementById('result').innerHTML = `Вы ${mistakecounter < 2 ? "Вы сдали тест" : "Вы НЕ сдали тест"}
-                ${10 - mistakecounter} правильных ответа из 10`;
+                Правильных ответов: ${10 - mistakecounter} из 10`;
                 mistakecounter = 0;
                 router = 0;
                 tg.MainButton.hide();
