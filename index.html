@@ -304,7 +304,8 @@
                             if (trening == false) {
                                 mistake = true;
                             } else {
-                                tg.showPopup("Ответ не верный", `правильный ответ ${rightanswer}`);
+                                let message = "Правильный ответ " + rightanswer.toString();  
+                                tg.showPopup({ title: 'Ответ неверный', message, buttons: [{ type: 'close' }] });
                                 console.log("3");
                             }
                         }
@@ -313,7 +314,8 @@
                             if (trening == false) {
                                 mistake = true;
                             } else {
-                                tg.showPopup("Ответ не верный", `правильный ответ ${rightanswer}`);
+                                let message = "Правильный ответ " + rightanswer.toString();  
+                                tg.showPopup({ title: 'Ответ неверный', message, buttons: [{ type: 'close' }] });
                                 console.log("4");
                             }
                         }
