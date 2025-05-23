@@ -329,6 +329,15 @@
                 document.getElementById('DynamicContainer').innerHTML = singlechoice ? templates[1] : templates[2];
             } else { // иначе считываем ответы
                 let chboxs = [document.getElementById('an1').checked, document.getElementById('an2').checked, document.getElementById('an3').checked];
+
+                if (chboxs.indexOf(true) != -1) {
+                    /*
+                    let message = "Выберите вариант ответа";
+                    tg.showPopup({ title: 'Ответ не дан', message, buttons: [{ type: 'close' }] });
+                    */
+                    return;
+                }
+
                 console.log("1");
                 let mistake = false;
                 for (let i = 0; i < 3; i++) {
@@ -374,7 +383,7 @@
                 return;*/
 
                 document.getElementById('DynamicContainer').innerHTML = templates[3];
-                document.getElementById('result').innerHTML = `Вы ${mistakecounter < 2 ? "сдали тест" : "НЕ сдали тест"} \nПравильных ответов: ${10 - mistakecounter} из 10`;
+                document.getElementById('result').innerHTML = `Вы ${mistakecounter < 2 ? "сдали тест" : "НЕ сдали тест"}<br>Правильных ответов: ${10 - mistakecounter} из 10`;
                 mistakecounter = 0;
                 router = 0;
                 tg.MainButton.hide();
