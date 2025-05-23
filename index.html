@@ -192,6 +192,7 @@
             trening = false;
             tg.MainButton.show();
             mistakecounter = 0;
+            answeredquestions = [];
         });
 
 
@@ -282,6 +283,7 @@
 
         let rightanswer = 0;
         let mistakecounter = 0;
+        let answeredquestions = [];
 
         tg.MainButton.onClick(MBC);
 
@@ -344,10 +346,20 @@
                 mistakecounter = 0;
                 router = 0;
                 tg.MainButton.hide();
+                answeredquestions = [];
 
             }
 
+            
             let randomNumber = Math.floor(Math.random() * (50 - 0) + 0);
+            if (trening == false) {
+                while (answeredquestions.indexOf(randomNumber) != -1) {
+                    randomNumber = Math.floor(Math.random() * (50 - 0) + 0);
+                }
+                answeredquestions.push(randomNumber);
+            }
+            
+
             document.getElementById('QE').innerHTML = dataobject[randomNumber].question;
             document.getElementById('an1txt').innerHTML = dataobject[randomNumber].first;
             document.getElementById('an2txt').innerHTML = dataobject[randomNumber].second;
