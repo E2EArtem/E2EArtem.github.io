@@ -202,6 +202,7 @@
             tg.MainButton.show();
             mistakecounter = 0;
             answeredquestions = [];
+            tg.MainButton.enable()
         });
 
 
@@ -319,6 +320,14 @@
 
         tg.MainButton.onClick(MBC);
 
+        function onRadioChange(value) {
+            let chboxs = [document.getElementById('an1').checked, document.getElementById('an2').checked, document.getElementById('an3').checked];
+
+            // Если есть хотя бы один выбранный ответ
+            if (chboxs.indexOf(true) != -1) {
+                tg.MainButton.enable()
+            }
+        }
         
         function MBC() {
             //tg.showAlert("Хорошо, ты нажал на главную кнопку");
@@ -326,22 +335,28 @@
             if (router == 0) { // Если мы переходим с начальной страницы - отображаем вопросы
                 tg.BackButton.show();
                 tg.MainButton.setText("Далее");
+                tg.MainButton.disable()
                 document.getElementById('DynamicContainer').innerHTML = singlechoice ? templates[1] : templates[2];
+
+                
+                let selector = singlechoice ? 'input[type="radio"][name="options"]' : 'input[type="checkbox"][name="options"]';
+                const radios = document.querySelectorAll(selector);
+
+                // Назначаем обработчик для каждого
+                radios.forEach(radio => {
+                    radio.addEventListener('change', event => {
+                        onRadioChange();
+                    });
+                });
+
+                
+
             } else { // иначе считываем ответы
                 let chboxs = [document.getElementById('an1').checked, document.getElementById('an2').checked, document.getElementById('an3').checked];
 
-                if (chboxs.indexOf(true) == -1) {
-                    /*
-                    let message = "Выберите вариант ответа";
-                    tg.showPopup({ title: 'Ответ не дан', message, buttons: [{ type: 'close' }] });
-                    */
-                    return;
-                }
 
-                console.log("1");
                 let mistake = false;
                 for (let i = 0; i < 3; i++) {
-                    console.log("2");
                     if (i == rightanswer - 1) { // если проверяем чекбокс с правильным ответом, он болжен быть true
                         if (chboxs[i] != true) {
                             if (trening == false) {
@@ -364,11 +379,9 @@
                         }
                     }   
                 }
-                console.log("5");
                 if (mistake == true) {
                     mistakecounter = mistakecounter + 1;
                 }
-                console.log("6");
                 document.getElementById('an1').checked = false;
                 document.getElementById('an2').checked = false;
                 document.getElementById('an3').checked = false;
@@ -406,6 +419,7 @@
             document.getElementById('an2txt').innerHTML = dataobject[randomNumber].second;
             document.getElementById('an3txt').innerHTML = dataobject[randomNumber].third;
             rightanswer = dataobject[randomNumber].answer;
+            tg.MainButton.disable()
 
             router = router + 1;
         }
