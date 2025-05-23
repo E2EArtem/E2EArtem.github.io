@@ -285,7 +285,7 @@
 
         tg.MainButton.onClick(MBC);
 
-
+        
         function MBC() {
             //tg.showAlert("Хорошо, ты нажал на главную кнопку");
 
@@ -295,23 +295,17 @@
                 document.getElementById('DynamicContainer').innerHTML = templates[1];
             } else { // иначе считываем ответы
                 let chboxs = [document.getElementById('an1').checked, document.getElementById('an2').checked, document.getElementById('an3').checked];
-
-                console.log("Чекбоксы");
-                console.log(chboxs);
-                console.log("Правильный ответ");
-                console.log(rightanswer);
-
+                console.log("1");
                 let mistake = false;
                 for (let i = 0; i < 3; i++) {
-                    console.log("Разбираем чекбокс");
-                    console.log(i);
-                    
+                    console.log("2");
                     if (i == rightanswer - 1) { // если проверяем чекбокс с правильным ответом, он болжен быть true
                         if (chboxs[i] != true) {
                             if (trening == false) {
                                 mistake = true;
                             } else {
                                 tg.showAlert("Выбранный вами ответ не верный");
+                                console.log("3");
                             }
                         }
                     } else { // иначе он должен быть false
@@ -320,20 +314,21 @@
                                 mistake = true;
                             } else {
                                 tg.showAlert("Выбранный вами ответ не верный");
+                                console.log("4");
                             }
                         }
                     }   
                 }
+                console.log("5");
                 if (mistake == true) {
                     mistakecounter = mistakecounter + 1;
                 }
-
+                console.log("6");
                 document.getElementById('an1').checked = false;
                 document.getElementById('an2').checked = false;
                 document.getElementById('an3').checked = false;
-
-
             }
+
             if ((router == 10) && (trening == false)) {
                 /*tg.showAlert("Поздравляем, вы успешно сдали тест!");
                 tg.MainButton.setText("Начать тест");
@@ -357,18 +352,7 @@
             document.getElementById('an3txt').innerHTML = dataobject[randomNumber].third;
             rightanswer = dataobject[randomNumber].answer;
 
-
-
-
-
-
-
-
-
-
             router = router + 1;
-
-
         }
 
 
