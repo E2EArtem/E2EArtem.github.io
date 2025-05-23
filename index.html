@@ -330,7 +330,7 @@
             } else { // иначе считываем ответы
                 let chboxs = [document.getElementById('an1').checked, document.getElementById('an2').checked, document.getElementById('an3').checked];
 
-                if (chboxs.indexOf(true) != -1) {
+                if (chboxs.indexOf(true) == -1) {
                     /*
                     let message = "Выберите вариант ответа";
                     tg.showPopup({ title: 'Ответ не дан', message, buttons: [{ type: 'close' }] });
