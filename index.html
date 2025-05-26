@@ -333,7 +333,6 @@
         
         function MBC() {
             //tg.showAlert("Хорошо, ты нажал на главную кнопку");
-            tg.MainButton.showProgress(leaveActive = true);
 
             if (router == 0) { // Если мы переходим с начальной страницы - отображаем вопросы
                 tg.BackButton.show();
@@ -420,7 +419,13 @@
                 answeredquestions.push(randomNumber);
             }
 
-            questionstring = "Вопрос №" + dataobject[randomNumber].index.toString() + "<br>" + dataobject[randomNumber].question;
+            let questionstring = "";
+            if (trening) {
+                questionstring = "Вопрос №" + dataobject[randomNumber].index.toString() + "<br>" + dataobject[randomNumber].question;
+            } else {
+                questionstring = "Вопрос №" + (router + 1).toString() + "<br>" + dataobject[randomNumber].question;
+            }
+
             document.getElementById('QE').innerHTML = questionstring;
             document.getElementById('an1txt').innerHTML = dataobject[randomNumber].first;
             document.getElementById('an2txt').innerHTML = dataobject[randomNumber].second;
