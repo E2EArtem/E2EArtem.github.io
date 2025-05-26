@@ -333,6 +333,7 @@
         
         function MBC() {
             //tg.showAlert("Хорошо, ты нажал на главную кнопку");
+            tg.MainButton.showProgress(leaveActive = true);
 
             if (router == 0) { // Если мы переходим с начальной страницы - отображаем вопросы
                 tg.BackButton.show();
