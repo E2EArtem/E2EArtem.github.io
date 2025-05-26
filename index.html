@@ -423,7 +423,7 @@
             if (trening) {
                 questionstring = "Вопрос №" + dataobject[randomNumber].index.toString() + "<br>" + dataobject[randomNumber].question;
             } else {
-                questionstring = "Вопрос №" + (router + 1).toString() + "<br>" + dataobject[randomNumber].question;
+                questionstring = "Вопрос " + (router + 1).toString() + " из 10" + "<br>" + dataobject[randomNumber].question;
             }
 
             document.getElementById('QE').innerHTML = questionstring;
