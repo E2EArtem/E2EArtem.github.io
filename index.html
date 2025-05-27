@@ -163,7 +163,7 @@
         const tg = window.Telegram.WebApp;
 
 
-        async function getValue(key) {
+        function getValue(key) {
             tg.DeviceStorage.getItem(key, (error, value) => {
 
                 // TODO: Тут честно себе пообещаем, что после релиза сделаем обработку ошибок
