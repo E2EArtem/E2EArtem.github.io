@@ -163,18 +163,17 @@
         const tg = window.Telegram.WebApp;
 
 
-        async function getValue(key) {
-            tg.DeviceStorage.getItem(key, (error, value) => {
-
-                // TODO: Тут честно себе пообещаем, что после релиза сделаем обработку ошибок
-                if (error != null) {
-                    console.log("Ошибка при получении значения", error);
-                    return null;
-                }
-
-                // Парсим из строки нужный нам объект
-                return await value;
-            })
+        function getValue(key) {
+            return new Promise((resolve, reject) => {
+                tg.DeviceStorage.getItem(key, (error, value) => {
+                    if (error != null) {
+                        console.log("Ошибка при получении значения", error);
+                        reject(error);
+                        return;
+                    }
+                    resolve(value);
+                });
+            });
         }
 
         
@@ -232,7 +231,13 @@
             answeredquestions = [];
             tg.MainButton.enable()
             tg.MainButton.color = tg.themeParams.button_color
-            let lasttry = getValue("lasttry");
+            let lasttry = getValue('lasttry')
+                .then((value) => {
+                    console.log('Полученное значение:', value);
+                })
+                .catch((error) => {
+                    console.error('Ошибка:', error);
+                });
             if (lasttry != null) {
                 document.getElementById('result').innerHTML = `Последняя попытка: ${lasttry}/10`;
             }
@@ -482,7 +487,13 @@
 
         document.getElementById('DynamicContainer').innerHTML = templates[0];
         document.getElementById('div').innerHTML = `Здравствуйте, ${tg.initDataUnsafe.user.first_name}!<br>Для начала теста нажмите "Начать тест"<br>`
-        let lasttry = getValue("lasttry");
+        let lasttry = getValue('lasttry')
+            .then((value) => {
+                console.log('Полученное значение:', value);
+            })
+            .catch((error) => {
+                console.error('Ошибка:', error);
+            });
         if (lasttry != null) {
             document.getElementById('result').innerHTML = `Последняя попытка: ${lasttry}/10`;
         }
