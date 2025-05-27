@@ -162,6 +162,34 @@
 
         const tg = window.Telegram.WebApp;
 
+
+        async function getValue(key) {
+            tg.DeviceStorage.getItem(key, (error, value) => {
+
+                // TODO: Тут честно себе пообещаем, что после релиза сделаем обработку ошибок
+                if (error != null) {
+                    console.log("Ошибка при получении значения", error);
+                    return null;
+                }
+
+                // Парсим из строки нужный нам объект
+                return value;
+            })
+        }
+
+        
+
+
+        
+
+
+
+
+
+
+
+
+
         const singlechoice = true;
 
         // Включаем расширенный режим (если необходимо)
@@ -204,6 +232,10 @@
             answeredquestions = [];
             tg.MainButton.enable()
             tg.MainButton.color = tg.themeParams.button_color
+            let lasttry = getValue("lasttry");
+            if (lasttry != null) {
+                document.getElementById('result').innerHTML = `Последняя попытка: ${lasttry}/10`;
+            }
         });
 
 
@@ -217,6 +249,7 @@
             <div class="section">
             <div id="div">Для начала теста нажмите "Начать тест"</div>
             <div><a href="#" onclick="Trening(); return false;">Тренировка</a></div>
+            <div id="result"></div>
             </div>
       `,
             `
@@ -403,10 +436,11 @@
 
                 document.getElementById('DynamicContainer').innerHTML = templates[3];
                 document.getElementById('result').innerHTML = `Вы ${mistakecounter <= 2 ? "сдали тест" : "НЕ сдали тест"}<br>Правильных ответов: ${10 - mistakecounter} из 10`;
-                mistakecounter = 0;
                 router = 0;
                 tg.MainButton.hide();
                 answeredquestions = [];
+                tg.DeviceStorage.setItem("lasttry", (10 - mistakecounter).toString())
+                mistakecounter = 0;
 
             }
 
@@ -448,6 +482,12 @@
 
         document.getElementById('DynamicContainer').innerHTML = templates[0];
         document.getElementById('div').innerHTML = `Здравствуйте, ${tg.initDataUnsafe.user.first_name}!<br>Для начала теста нажмите "Начать тест"<br>`
+        let lasttry = getValue("lasttry");
+        if (lasttry != null) {
+            document.getElementById('result').innerHTML = `Последняя попытка: ${lasttry}/10`;
+        }
+        
+        
 
 
     </script>
