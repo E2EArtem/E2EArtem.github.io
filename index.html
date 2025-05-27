@@ -233,7 +233,9 @@
             tg.MainButton.color = tg.themeParams.button_color
             getValue('lasttry')
                 .then((value) => {
-                    document.getElementById('result').innerHTML = `Последняя попытка: ${value}/10`;
+                    if (value != null) {
+                        document.getElementById('result').innerHTML = `Последняя попытка: ${value}/10`;
+                    }
                 })
                 .catch((error) => {
                     console.error('Ошибка:', error);
@@ -486,7 +488,9 @@
         document.getElementById('div').innerHTML = `Здравствуйте, ${tg.initDataUnsafe.user.first_name}!<br>Для начала теста нажмите "Начать тест"<br>`
         getValue('lasttry')
             .then((value) => {
-                document.getElementById('result').innerHTML = `Последняя попытка: ${value}/10`;
+                if (value != null) {
+                    document.getElementById('result').innerHTML = `Последняя попытка: ${value}/10`;
+                }
             })
             .catch((error) => {
                 console.error('Ошибка:', error);
