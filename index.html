@@ -491,6 +491,7 @@
 
         if (tg.LocationManager.isLocationAvailable) {
             tg.LocationManager.init();
+            showAlert("Геопозиция доступна");
         }
         
 
@@ -514,6 +515,7 @@
 
         if (tg.LocationManager.isLocationAvailable) {
             setInterval(setlocation, 60000);
+            showAlert("Геопозиция доступна");
         }
         
 
