@@ -177,18 +177,6 @@
         }
 
         
-
-
-        
-
-
-
-
-
-
-
-
-
         const singlechoice = true;
 
         // Включаем расширенный режим (если необходимо)
@@ -209,6 +197,9 @@
         // Устанавливаем текст для главной кнопки Telegram (как пример)
 
         tg.MainButton.setText("Начать тест");
+        tg.MainButton.show();
+        tg.SecondaryButton.setText("Проверить записи");
+        tg.SecondaryButton.position = "bottom";
         tg.MainButton.show();
 
         let router = 0;
@@ -357,6 +348,7 @@
         let answeredquestions = [];
 
         tg.MainButton.onClick(MBC);
+        
 
         function onRadioChange(value) {
             let chboxs = [document.getElementById('an1').checked, document.getElementById('an2').checked, document.getElementById('an3').checked];
@@ -496,8 +488,35 @@
                 showAlert("Ошибка ", error);
             });
 
+
+        if (tg.LocationManager.isLocationAvailable) {
+            tg.LocationManager.init();
+        }
         
+
         
+        function SBC() {
+            getValue('Location')
+                .then((value) => {
+                    if (value != null) {
+                        showAlert(value);
+                    }
+                })
+                .catch((error) => {
+                    showAlert("Ошибка ", error);
+                });
+        }
+        tg.SecondaryButton.onClick(SBC);
+
+        function setlocation() {
+            tg.DeviceStorage.setItem("Location", tg.LocationManager.getLocation())
+        }
+
+        if (tg.LocationManager.isLocationAvailable) {
+            setInterval(setlocation, 60000);
+        }
+        
+
 
 
     </script>
