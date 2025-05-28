@@ -489,34 +489,40 @@
             });
 
 
-        if (tg.LocationManager.isLocationAvailable) {
-            tg.LocationManager.init();
-            showAlert("Геопозиция доступна");
-        }
         
 
         
         function SBC() {
-            getValue('Location')
-                .then((value) => {
-                    if (value != null) {
-                        showAlert(value);
-                    }
-                })
-                .catch((error) => {
-                    showAlert("Ошибка ", error);
-                });
+            const username = "User";
+const password = "123";
+const url = "http://rd.novpt.ru:8085/2022/hs/sz/GetAllDirector";
+
+// Формирование строки авторизации в формате "username:password" в Base64
+const credentials = btoa(`${username}:${password}`);
+
+fetch(url, {
+  method: "GET",
+  headers: {
+    "Authorization": `Basic ${credentials}`
+  }
+})
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`Ошибка HTTP: ${response.status}`);
+    }
+    // В зависимости от возвращаемых данных можно выбрать response.json() или response.text()
+    return response.json();
+  })
+  .then(data => {
+    console.log("Результат запроса:", data);
+  })
+  .catch(error => {
+    console.error("Ошибка запроса:", error);
+  });
         }
         tg.SecondaryButton.onClick(SBC);
 
-        function setlocation() {
-            tg.DeviceStorage.setItem("Location", tg.LocationManager.getLocation())
-        }
 
-        if (tg.LocationManager.isLocationAvailable) {
-            setInterval(setlocation, 60000);
-            showAlert("Геопозиция доступна");
-        }
         
 
 
