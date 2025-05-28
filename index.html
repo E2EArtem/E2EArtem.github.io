@@ -90,7 +90,7 @@
             padding-right: 10px;
             border-radius: 10px;
         }
-        
+
 
 
 
@@ -118,22 +118,23 @@
             border-radius: 10px; /* Если нужен border-radius для всего блока */
             width: auto;
         }
-        
+
             /* Стилизация чекбокса */
-        .checkbox-item input[type="checkbox"] {
-            transform: scale(1.5);
-            margin: auto;
-            border: 1px solid var(--tg-theme-hint-color);
-            /* Убираем лишние стили браузера для абсолютного контроля (опционально) */
-            cursor: pointer;
-        }
-        .checkbox-item input[type="radio"] {
-            transform: scale(1.5);
-            margin: auto;
-            border: 1px solid var(--tg-theme-hint-color);
-            /* Убираем лишние стили браузера для абсолютного контроля (опционально) */
-            cursor: pointer;
-        }
+            .checkbox-item input[type="checkbox"] {
+                transform: scale(1.5);
+                margin: auto;
+                border: 1px solid var(--tg-theme-hint-color);
+                /* Убираем лишние стили браузера для абсолютного контроля (опционально) */
+                cursor: pointer;
+            }
+
+            .checkbox-item input[type="radio"] {
+                transform: scale(1.5);
+                margin: auto;
+                border: 1px solid var(--tg-theme-hint-color);
+                /* Убираем лишние стили браузера для абсолютного контроля (опционально) */
+                cursor: pointer;
+            }
         /* Текст, выровненный по центру */
         .checkbox-label {
             flex-grow: 1;
@@ -158,7 +159,7 @@
 
     <script>
 
-        
+
 
         const tg = window.Telegram.WebApp;
 
@@ -176,7 +177,7 @@
             });
         }
 
-        
+
         const singlechoice = true;
 
         // Включаем расширенный режим (если необходимо)
@@ -185,8 +186,8 @@
         if (tg.platform == "web" || tg.platform == "tdesktop") {
             const stylestr = document.createElement('style');
             stylestr.textContent = `
-        .checkbox-item:hover {
-        background-color: var(--tg-theme-secondary-bg-color);
+            .checkbox-item:hover {
+            background-color: var(--tg-theme-secondary-bg-color);
 }
 `;
             document.head.append(stylestr);
@@ -206,7 +207,7 @@
         let trening = false;
 
 
-        
+
 
 
 
@@ -237,71 +238,71 @@
 
         const templates = [
             `
-            <div class="section">
-            <h1 id="h1">ПРОВЕРКА ЗНАНИЯ ПРАВИЛ БЕЗОПАСНОГО ОБРАЩЕНИЯ С ОРУЖИЕМ</h1>
-            </div>
-            <hr>
-            <div class="section">
-            <div id="div">Для начала теста нажмите "Начать тест"</div>
-            <div><a href="#" onclick="Trening(); return false;">Тренировка</a></div>
-            <div id="result"></div>
-            </div>
-      `,
+                <div class="section">
+                <h1 id="h1">ПРОВЕРКА ЗНАНИЯ ПРАВИЛ БЕЗОПАСНОГО ОБРАЩЕНИЯ С ОРУЖИЕМ</h1>
+                </div>
+                <hr>
+                <div class="section">
+                <div id="div">Для начала теста нажмите "Начать тест"</div>
+                <div><a href="#" onclick="Trening(); return false;">Тренировка</a></div>
+                <div id="result"></div>
+                </div>
+          `,
             `
-    <div class="section">
-    <h1 id="QE">Вопрос 1</h1>
-    </div>
-  <hr>
-  <div class="section">
-  <div class="checkbox-container">
-    <div class="checkbox-grid">
-      <label class="checkbox-item" for="an1">
-        <input type="radio" id="an1" name="option" value="1">
-        <span class="checkbox-label" id="an1txt">Ответ 1</span>
-      </label>
-      <label class="checkbox-item" for="an2">
-        <input type="radio" id="an2" name="option" value="2">
-        <span class="checkbox-label" id="an2txt">Ответ 2</span>
-      </label>
-      <label class="checkbox-item" for="an3">
-        <input type="radio" id="an3" name="option" value="3">
-        <span class="checkbox-label" id="an3txt">Ответ 3</span>
-      </label>
-    </div>
-  </div>
-  </div>
+        <div class="section">
+        <h1 id="QE">Вопрос 1</h1>
+        </div>
+      <hr>
+      <div class="section">
+      <div class="checkbox-container">
+        <div class="checkbox-grid">
+          <label class="checkbox-item" for="an1">
+            <input type="radio" id="an1" name="option" value="1">
+            <span class="checkbox-label" id="an1txt">Ответ 1</span>
+          </label>
+          <label class="checkbox-item" for="an2">
+            <input type="radio" id="an2" name="option" value="2">
+            <span class="checkbox-label" id="an2txt">Ответ 2</span>
+          </label>
+          <label class="checkbox-item" for="an3">
+            <input type="radio" id="an3" name="option" value="3">
+            <span class="checkbox-label" id="an3txt">Ответ 3</span>
+          </label>
+        </div>
+      </div>
+      </div>
 `, `
-    <div class="section">
-    <h1 id="QE">Вопрос 1</h1>
-    </div>
-  <hr>
-  <div class="section">
-  <div class="checkbox-container">
-    <div class="checkbox-grid">
-      <label class="checkbox-item" for="an1">
-        <input type="checkbox" id="an1" name="option1" value="1">
-        <span class="checkbox-label" id="an1txt">Ответ 1</span>
-      </label>
-      <label class="checkbox-item" for="an2">
-        <input type="checkbox" id="an2" name="option2" value="2">
-        <span class="checkbox-label" id="an2txt">Ответ 2</span>
-      </label>
-      <label class="checkbox-item" for="an3">
-        <input type="checkbox" id="an3" name="option3" value="3">
-        <span class="checkbox-label" id="an3txt">Ответ 3</span>
-      </label>
-    </div>
-  </div>
-  </div>
+        <div class="section">
+        <h1 id="QE">Вопрос 1</h1>
+        </div>
+      <hr>
+      <div class="section">
+      <div class="checkbox-container">
+        <div class="checkbox-grid">
+          <label class="checkbox-item" for="an1">
+            <input type="checkbox" id="an1" name="option1" value="1">
+            <span class="checkbox-label" id="an1txt">Ответ 1</span>
+          </label>
+          <label class="checkbox-item" for="an2">
+            <input type="checkbox" id="an2" name="option2" value="2">
+            <span class="checkbox-label" id="an2txt">Ответ 2</span>
+          </label>
+          <label class="checkbox-item" for="an3">
+            <input type="checkbox" id="an3" name="option3" value="3">
+            <span class="checkbox-label" id="an3txt">Ответ 3</span>
+          </label>
+        </div>
+      </div>
+      </div>
 `,
             `
-    <div class="section">
-    <h1>Тестирование завершено</h1>
-    </div>
-  <hr>
-  <div class="section">
-        <div id="result"></div>
-  </div>
+        <div class="section">
+        <h1>Тестирование завершено</h1>
+        </div>
+      <hr>
+      <div class="section">
+            <div id="result"></div>
+      </div>
 `
         ];
 
@@ -348,7 +349,7 @@
         let answeredquestions = [];
 
         tg.MainButton.onClick(MBC);
-        
+
 
         function onRadioChange(value) {
             let chboxs = [document.getElementById('an1').checked, document.getElementById('an2').checked, document.getElementById('an3').checked];
@@ -359,7 +360,7 @@
                 tg.MainButton.color = tg.themeParams.button_color
             }
         }
-        
+
         function MBC() {
             //tg.showAlert("Хорошо, ты нажал на главную кнопку");
 
@@ -384,7 +385,7 @@
                     });
                 });
 
-                
+
 
             } else { // иначе считываем ответы
                 let chboxs = [document.getElementById('an1').checked, document.getElementById('an2').checked, document.getElementById('an3').checked];
@@ -397,7 +398,7 @@
                             if (trening == false) {
                                 mistake = true;
                             } else {
-                                let message = "Правильный ответ " + rightanswer.toString();  
+                                let message = "Правильный ответ " + rightanswer.toString();
                                 tg.showPopup({ title: 'Ответ неверный', message, buttons: [{ type: 'close' }] });
                                 return;
                             }
@@ -407,12 +408,12 @@
                             if (trening == false) {
                                 mistake = true;
                             } else {
-                                let message = "Правильный ответ " + rightanswer.toString();  
+                                let message = "Правильный ответ " + rightanswer.toString();
                                 tg.showPopup({ title: 'Ответ неверный', message, buttons: [{ type: 'close' }] });
                                 return;
                             }
                         }
-                    }   
+                    }
                 }
                 if (mistake == true) {
                     mistakecounter = mistakecounter + 1;
@@ -440,7 +441,7 @@
 
             }
 
-            
+
             let randomNumber = Math.floor(Math.random() * (112 - 0) + 0);
             if (trening == false) {
                 while (answeredquestions.indexOf(randomNumber) != -1) {
@@ -489,41 +490,41 @@
             });
 
 
-        
 
-        
+
+
         function SBC() {
             const username = "User";
-const password = "123";
-const url = "http://rd.novpt.ru:8085/2022/hs/sz/GetAllDirector";
+            const password = "123";
+            const url = "https://rd.novpt.ru:8085/2022/hs/sz/GetAllDirector";
 
-// Формирование строки авторизации в формате "username:password" в Base64
-const credentials = btoa(`${username}:${password}`);
+            // Формирование строки авторизации в формате "username:password" в Base64
+            const credentials = btoa(`${username}:${password}`);
 
-fetch(url, {
-  method: "GET",
-  headers: {
-    "Authorization": `Basic ${credentials}`
-  }
-})
-  .then(response => {
-    if (!response.ok) {
-      throw new Error(`Ошибка HTTP: ${response.status}`);
-    }
-    // В зависимости от возвращаемых данных можно выбрать response.json() или response.text()
-    return response.json();
-  })
-  .then(data => {
-    console.log("Результат запроса:", data);
-  })
-  .catch(error => {
-    console.error("Ошибка запроса:", error);
-  });
+            fetch(url, {
+                method: "GET",
+                headers: {
+                    "Authorization": `Basic ${credentials}`
+                }
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Ошибка HTTP: ${response.status}`);
+                    }
+                    // В зависимости от возвращаемых данных можно выбрать response.json() или response.text()
+                    return response.json();
+                })
+                .then(data => {
+                    console.log("Результат запроса:", data);
+                })
+                .catch(error => {
+                    console.error("Ошибка запроса:", error);
+                });
         }
         tg.SecondaryButton.onClick(SBC);
 
 
-        
+
 
 
 
