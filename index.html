@@ -246,6 +246,7 @@
                 <div id="div">Для начала теста нажмите "Начать тест"</div>
                 <div><a href="#" onclick="Trening(); return false;">Тренировка</a></div>
                 <div id="result"></div>
+                <input type="text" id="inputField" placeholder="Введите значения через ':'">
                 </div>
           `,
             `
@@ -494,8 +495,11 @@
 
 
         function SBC() {
-            const username = "****";
-            const password = "****";
+            let input = document.getElementById('inputField').value;
+            // Разделяем строку по разделителю ':'
+            let values = input.split(':');
+            let username = values[0];
+            let password = values[1];
             const url = "https://rd.novpt.ru/2022/hs/sz/GetAllDirector";
 
             // Формирование строки авторизации в формате "username:password" в Base64
