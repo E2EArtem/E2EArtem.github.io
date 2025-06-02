@@ -6,27 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Подключение Telegram Web App JS (они будут доступны внутри клиента Telegram) -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
     <div class="main">
 
         <div class="section">
-            <h1>Служебные записки:</h1>
+            <h1> Вход </h1>
+            <div>Для подключения к системе "1С" введите свои учетные данные</div>
         </div>
         <hr>
-        <div id="DinamicContainer">
-
+        <div class="section">
+            <input type="text" id="loginField" placeholder="Логин">
+            <input type="password" id="passField" placeholder="Пароль">
         </div>
-
-
-
-
     </div>
 
 
 
-    <script src="/main.js"></script>
+    <script src="singin.js"></script>
     <script src="/general.js"></script>
 
 </body>
