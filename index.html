@@ -6,28 +6,535 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Подключение Telegram Web App JS (они будут доступны внутри клиента Telegram) -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <link rel="stylesheet" href="./styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--tg-theme-text-color);
+            background: var(--tg-theme-secondary-bg-color);
+        }
+
+        .main {
+            width: 100%;
+            padding: 25px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 40px;
+            margin-bottom: 10px;
+            font-size: large;
+        }
+
+        img {
+            width: 70px;
+            margin: 30px auto;
+        }
+
+        .btn {
+            border: 0;
+            border-radius: 5px;
+            margin-top: 50px;
+            height: 60px;
+            width: 200px;
+            font-style: 20px;
+            font-weight: 500;
+            cursor: pointer;
+            color: var(--tg-theme-button-text-color);
+            background: var(--tg-theme-button-color);
+        }
+
+        form {
+            text-align: center;
+        }
+
+        input {
+            outline: none;
+            border-radius: 5px;
+            border: 2px solid var(--tg-theme-button-color);
+            padding: 15px 10px;
+            margin: 10px 0 0;
+            background: var(--tg-theme-section-separator-color);
+            color: var(--tg-theme-text-color);
+            transition: all .2s;
+        }
+
+            input:focus {
+                border-color: var(--tg-theme-secondary-bg-color)
+            }
+
+        hr {
+            border: 1px solid var(--tg-theme-hint-color);
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        a {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            color: var(--tg-theme-link-color);
+            text-decoration: none;
+        }
+
+        .section {
+            background: var(--tg-theme-bg-color);
+            padding-top: 20px;
+            padding-bottom: 20px;
+            padding-left: 10px;
+            padding-right: 10px;
+            border-radius: 10px;
+        }
+
+
+
+
+        .checkbox-container {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        /* Сетка для 2 столбцов */
+        .checkbox-grid {
+            display: flex;
+            /*flex-wrap: wrap;*/
+            flex-direction: column;
+            gap: 10px;
+        }
+        /* Элемент каждого чекбокса, теперь используется <label> */
+        .checkbox-item {
+            width: calc(50% - 10px);
+            /*background-color: var(--tg-theme-button-color);*/
+            padding: 12px;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            border-radius: 10px; /* Если нужен border-radius для всего блока */
+            width: auto;
+        }
+
+            /* Стилизация чекбокса */
+            .checkbox-item input[type="checkbox"] {
+                transform: scale(1.5);
+                margin: auto;
+                border: 1px solid var(--tg-theme-hint-color);
+                /* Убираем лишние стили браузера для абсолютного контроля (опционально) */
+                cursor: pointer;
+            }
+
+            .checkbox-item input[type="radio"] {
+                transform: scale(1.5);
+                margin: auto;
+                border: 1px solid var(--tg-theme-hint-color);
+                /* Убираем лишние стили браузера для абсолютного контроля (опционально) */
+                cursor: pointer;
+            }
+        /* Текст, выровненный по центру */
+        .checkbox-label {
+            flex-grow: 1;
+            text-align: left;
+            padding-left: 15px;
+            font-size: medium;
+        }
+    </style>
 </head>
 <body>
     <div class="main">
 
-        <div class="section">
-            <h1>Служебные записки:</h1>
+        <div id="DynamicContainer">
+            <h1 id="QE">Тестирование</h1>
+            <hr>
+            <div>Для начала теста нажмите Начать тест</div>
         </div>
-        <hr>
-        <div id="DinamicContainer">
-
-        </div>
-
-
-
 
     </div>
 
 
 
-    <script src="/main.js"></script>
-    <script src="/general.js"></script>
+    <script>
+
+
+
+        const tg = window.Telegram.WebApp;
+
+
+        function getValue(key) {
+            return new Promise((resolve, reject) => {
+                tg.DeviceStorage.getItem(key, (error, value) => {
+                    if (error != null) {
+                        showAlert("Ошибка ", error);
+                        reject(error);
+                        return;
+                    }
+                    resolve(value);
+                });
+            });
+        }
+
+
+        const singlechoice = true;
+
+        // Включаем расширенный режим (если необходимо)
+        //tg.expand();
+
+        if (tg.platform == "web" || tg.platform == "tdesktop") {
+            const stylestr = document.createElement('style');
+            stylestr.textContent = `
+            .checkbox-item:hover {
+            background-color: var(--tg-theme-secondary-bg-color);
+}
+`;
+            document.head.append(stylestr);
+        }
+
+
+
+        // Устанавливаем текст для главной кнопки Telegram (как пример)
+
+        tg.MainButton.setText("Начать тест");
+        tg.MainButton.show();
+        tg.SecondaryButton.setText("Проверить записи");
+        tg.SecondaryButton.position = "bottom";
+        tg.SecondaryButton.show();
+
+        let router = 0;
+        let trening = false;
+
+
+
+
+
+
+
+        tg.BackButton.onClick(function () {
+            tg.MainButton.setText("Начать тест");
+            tg.BackButton.hide();
+            document.getElementById('DynamicContainer').innerHTML = templates[0];
+            router = 0;
+            trening = false;
+            tg.MainButton.show();
+            mistakecounter = 0;
+            answeredquestions = [];
+            tg.MainButton.enable()
+            tg.MainButton.color = tg.themeParams.button_color
+            getValue('lasttry')
+                .then((value) => {
+                    if (value != null) {
+                        document.getElementById('result').innerHTML = `Последняя попытка: ${value}/10`;
+                    }
+                })
+                .catch((error) => {
+                    showAlert("Ошибка ", error);
+                });
+        });
+
+
+
+        const templates = [
+            `
+                <div class="section">
+                <h1 id="h1">ПРОВЕРКА ЗНАНИЯ ПРАВИЛ БЕЗОПАСНОГО ОБРАЩЕНИЯ С ОРУЖИЕМ</h1>
+                </div>
+                <hr>
+                <div class="section">
+                <div id="div">Для начала теста нажмите "Начать тест"</div>
+                <div><a href="#" onclick="Trening(); return false;">Тренировка</a></div>
+                <div id="result"></div>
+                <input type="text" id="inputField" placeholder="Введите значения через ':'">
+                </div>
+          `,
+            `
+        <div class="section">
+        <h1 id="QE">Вопрос 1</h1>
+        </div>
+      <hr>
+      <div class="section">
+      <div class="checkbox-container">
+        <div class="checkbox-grid">
+          <label class="checkbox-item" for="an1">
+            <input type="radio" id="an1" name="option" value="1">
+            <span class="checkbox-label" id="an1txt">Ответ 1</span>
+          </label>
+          <label class="checkbox-item" for="an2">
+            <input type="radio" id="an2" name="option" value="2">
+            <span class="checkbox-label" id="an2txt">Ответ 2</span>
+          </label>
+          <label class="checkbox-item" for="an3">
+            <input type="radio" id="an3" name="option" value="3">
+            <span class="checkbox-label" id="an3txt">Ответ 3</span>
+          </label>
+        </div>
+      </div>
+      </div>
+`, `
+        <div class="section">
+        <h1 id="QE">Вопрос 1</h1>
+        </div>
+      <hr>
+      <div class="section">
+      <div class="checkbox-container">
+        <div class="checkbox-grid">
+          <label class="checkbox-item" for="an1">
+            <input type="checkbox" id="an1" name="option1" value="1">
+            <span class="checkbox-label" id="an1txt">Ответ 1</span>
+          </label>
+          <label class="checkbox-item" for="an2">
+            <input type="checkbox" id="an2" name="option2" value="2">
+            <span class="checkbox-label" id="an2txt">Ответ 2</span>
+          </label>
+          <label class="checkbox-item" for="an3">
+            <input type="checkbox" id="an3" name="option3" value="3">
+            <span class="checkbox-label" id="an3txt">Ответ 3</span>
+          </label>
+        </div>
+      </div>
+      </div>
+`,
+            `
+        <div class="section">
+        <h1>Тестирование завершено</h1>
+        </div>
+      <hr>
+      <div class="section">
+            <div id="result"></div>
+      </div>
+`
+        ];
+
+
+        const csvURL = 'questions.csv';
+        let dataobject;
+
+        // Функция для обработки загруженного CSV с помощью PapaParse
+        function parseCSV(data) {
+            Papa.parse(data, {
+                header: true, // если CSV содержит строку заголовков
+                dynamicTyping: true, // автоматически преобразует числовые значения в числа
+                complete: function (results) {
+                    dataobject = results.data;
+                },
+                error: function (err) {
+                    console.error("Ошибка парсинга: ", err);
+                }
+            });
+        }
+
+        // Функция для загрузки CSV файла по URL
+        function downloadCSV(url) {
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Ошибка при получении CSV: ${response.status} ${response.statusText}`);
+                    }
+                    return response.text();
+                })
+                .then(csvData => {
+                    parseCSV(csvData);
+                })
+                .catch(error => {
+                    console.error("Ошибка загрузки: ", error);
+                });
+        }
+
+        // Запуск загрузки CSV
+        downloadCSV(csvURL);
+
+        let rightanswer = 0;
+        let mistakecounter = 0;
+        let answeredquestions = [];
+
+        tg.MainButton.onClick(MBC);
+
+
+        function onRadioChange(value) {
+            let chboxs = [document.getElementById('an1').checked, document.getElementById('an2').checked, document.getElementById('an3').checked];
+
+            // Если есть хотя бы один выбранный ответ
+            if (chboxs.indexOf(true) != -1) {
+                tg.MainButton.enable()
+                tg.MainButton.color = tg.themeParams.button_color
+            }
+        }
+
+        function MBC() {
+            //tg.showAlert("Хорошо, ты нажал на главную кнопку");
+
+            if (router == 0) { // Если мы переходим с начальной страницы - отображаем вопросы
+                tg.BackButton.show();
+                tg.MainButton.setText("Далее");
+
+                tg.MainButton.disable()
+                tg.MainButton.color = tg.themeParams.hint_color
+
+                document.getElementById('DynamicContainer').innerHTML = singlechoice ? templates[1] : templates[2];
+
+                const radios = [];
+                radios.push(document.getElementById('an1'));
+                radios.push(document.getElementById('an2'));
+                radios.push(document.getElementById('an3'));
+
+                // Назначаем обработчик для каждого
+                radios.forEach(radio => {
+                    radio.addEventListener('change', event => {
+                        onRadioChange();
+                    });
+                });
+
+
+
+            } else { // иначе считываем ответы
+                let chboxs = [document.getElementById('an1').checked, document.getElementById('an2').checked, document.getElementById('an3').checked];
+
+
+                let mistake = false;
+                for (let i = 0; i < 3; i++) {
+                    if (i == rightanswer - 1) { // если проверяем чекбокс с правильным ответом, он болжен быть true
+                        if (chboxs[i] != true) {
+                            if (trening == false) {
+                                mistake = true;
+                            } else {
+                                let message = "Правильный ответ " + rightanswer.toString();
+                                tg.showPopup({ title: 'Ответ неверный', message, buttons: [{ type: 'close' }] });
+                                return;
+                            }
+                        }
+                    } else { // иначе он должен быть false
+                        if (chboxs[i] == true) {
+                            if (trening == false) {
+                                mistake = true;
+                            } else {
+                                let message = "Правильный ответ " + rightanswer.toString();
+                                tg.showPopup({ title: 'Ответ неверный', message, buttons: [{ type: 'close' }] });
+                                return;
+                            }
+                        }
+                    }
+                }
+                if (mistake == true) {
+                    mistakecounter = mistakecounter + 1;
+                }
+                document.getElementById('an1').checked = false;
+                document.getElementById('an2').checked = false;
+                document.getElementById('an3').checked = false;
+            }
+
+            if ((router == 10) && (trening == false)) {
+                /*tg.showAlert("Поздравляем, вы успешно сдали тест!");
+                tg.MainButton.setText("Начать тест");
+                tg.BackButton.hide();
+                document.getElementById('DynamicContainer').innerHTML = templates[0];
+                router = 0;
+                return;*/
+
+                document.getElementById('DynamicContainer').innerHTML = templates[3];
+                document.getElementById('result').innerHTML = `Вы ${mistakecounter <= 2 ? "сдали тест" : "НЕ сдали тест"}<br>Правильных ответов: ${10 - mistakecounter} из 10`;
+                router = 0;
+                tg.MainButton.hide();
+                answeredquestions = [];
+                tg.DeviceStorage.setItem("lasttry", (10 - mistakecounter).toString())
+                mistakecounter = 0;
+
+            }
+
+
+            let randomNumber = Math.floor(Math.random() * (112 - 0) + 0);
+            if (trening == false) {
+                while (answeredquestions.indexOf(randomNumber) != -1) {
+                    randomNumber = Math.floor(Math.random() * (112 - 0) + 0);
+                }
+                answeredquestions.push(randomNumber);
+            }
+
+            let questionstring = "";
+            if (trening) {
+                questionstring = "Вопрос №" + dataobject[randomNumber].index.toString() + "<br>" + dataobject[randomNumber].question;
+            } else {
+                questionstring = "Вопрос " + (router + 1).toString() + " из 10" + "<br>" + dataobject[randomNumber].question;
+            }
+
+            document.getElementById('QE').innerHTML = questionstring;
+            document.getElementById('an1txt').innerHTML = dataobject[randomNumber].first;
+            document.getElementById('an2txt').innerHTML = dataobject[randomNumber].second;
+            document.getElementById('an3txt').innerHTML = dataobject[randomNumber].third;
+            rightanswer = dataobject[randomNumber].answer;
+            tg.MainButton.disable()
+            tg.MainButton.color = tg.themeParams.hint_color
+
+            router = router + 1;
+        }
+
+
+
+
+
+        function Trening() {
+            trening = true;
+            MBC();
+        }
+
+        document.getElementById('DynamicContainer').innerHTML = templates[0];
+        document.getElementById('div').innerHTML = `Здравствуйте, ${tg.initDataUnsafe.user.first_name}!<br>Для начала теста нажмите "Начать тест"<br>`
+        getValue('lasttry')
+            .then((value) => {
+                if (value != null) {
+                    document.getElementById('result').innerHTML = `Последняя попытка: ${value}/10`;
+                }
+            })
+            .catch((error) => {
+                showAlert("Ошибка ", error);
+            });
+
+
+
+
+
+        function SBC() {
+            let input = document.getElementById('inputField').value;
+            // Разделяем строку по разделителю ':'
+            let values = input.split(':');
+            let username = values[0];
+            let password = values[1];
+            const url = "https://rd.novpt.ru/2022/hs/sz/GetAllDirector";
+
+            // Формирование строки авторизации в формате "username:password" в Base64
+            const credentials = btoa(`${username}:${password}`);
+
+            fetch(url, {
+                method: "GET",
+                credentials: "include",
+                headers: {
+                    "Authorization": `Basic ${credentials}`
+                }
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Ошибка HTTP: ${response.status}`);
+                    }
+                    // В зависимости от возвращаемых данных можно выбрать response.json() или response.text()
+                    return response.json();
+                })
+                .then(data => {
+                    console.log("Результат запроса:", data);
+                })
+                .catch(error => {
+                    console.error("Ошибка запроса:", error);
+                });
+        }
+        tg.SecondaryButton.onClick(SBC);
+
+
+
+
+
+
+    </script>
+
 
 </body>
 </html>
