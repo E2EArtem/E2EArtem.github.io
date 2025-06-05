@@ -28,7 +28,7 @@ getValue('openDoc')
                     Comment: document.getElementById('commentField').value.toString().trim()
                 };
 
-                let url = "https://rd.novpt.ru/2022/hs/sz/mod"
+                let url = serverURL + "2022/hs/sz/mod"
                 let options = {
                     method: "POST",
                     credentials: "include",

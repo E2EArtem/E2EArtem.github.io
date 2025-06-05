@@ -3,6 +3,7 @@ var tg = window.Telegram.WebApp;
 
 var UserUIN;
 var credentials;
+var serverURL;
 
 
 tg.SettingsButton.onClick(() => {
@@ -67,3 +68,21 @@ getValue('UserUIN')
     .catch((error) => {
         console.log("Вы не авторизированны!", error);
     });
+
+getValue('serverURL')
+    .then((value) => {
+        if ((value != null) && (value != undefined) && (value != '')) {
+            console.log("Вы авторизированны");
+            serverURL = value;
+        } else {
+            console.log("Вы не авторизированны!");
+            let isAcsessPage = (window.location.href != (window.location.origin + '/singin/singin.html')) && (window.location.href != (window.location.origin + '/settings/settings.html'))
+            if (isAcsessPage) {
+                window.location.href = '/singin/singin.html';
+            }
+        }
+    })
+    .catch((error) => {
+        console.log("Вы не авторизированны!", error);
+    });
+

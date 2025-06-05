@@ -49,7 +49,22 @@ document.getElementById('passField').addEventListener('input', function () {
 function MBC() {
     let username = document.getElementById('loginField').value;
     let password = document.getElementById('passField').value;
-    let url = "https://rd.novpt.ru/2022/hs/sz/user/" + username;
+
+    let urlOrigin = '';  
+    let urlField = document.getElementById('urlField').value
+
+    if (urlField != '') {
+        if (urlField.includes("http")) {
+            urlOrigin += ("https://" + urlField.split("//")[1]);
+        } else {
+            urlOrigin += ("https://" + urlField);
+        }
+    } else {
+        urlOrigin += window.location.origin;
+    }
+    urlOrigin += "/";
+
+    let url = urlOrigin + "2022/hs/sz/user/" + username;
 
 
     // Формирование строки авторизации в формате "username:password" в Base64
@@ -76,6 +91,7 @@ function MBC() {
             console.log("Данные получены");
             if (data[0].UIN) {
                 tg.DeviceStorage.setItem("UserUIN", data[0].UIN);
+                tg.DeviceStorage.setItem("serverURL", urlOrigin);
                 window.location.href = '/';
             } else {
                 tg.showAlert("Доступ отклонен, обратитесь к администратору");
@@ -86,7 +102,6 @@ function MBC() {
             tg.showAlert("Неверный логин или пароль");
         });
 
-    console.log("qwe");
 }
 
 

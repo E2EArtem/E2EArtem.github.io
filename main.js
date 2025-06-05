@@ -2,7 +2,7 @@
 tg.SecondaryButton.onClick(SBC);
 tg.SecondaryButton.setText("Обновить список документов");
 tg.SecondaryButton.show();
-
+tg.BackButton.hide();
 
 
 
@@ -27,7 +27,8 @@ getValue('docList')
     
 
 function SBC() {
-    const url = "https://rd.novpt.ru/2022/hs/sz/getsz/" + UserUIN;
+
+    const url = serverURL + "2022/hs/sz/getsz/" + UserUIN;
 
     fetch(url, {
         method: "GET",

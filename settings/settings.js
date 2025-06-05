@@ -29,7 +29,21 @@ tg.MainButton.setText("Применить изменения");
 tg.MainButton.show();
 
 function MBC() {
-    // TODO обновление адреса сервера
+    let urlOrigin = '';
+    let urlField = document.getElementById('urlField').value
+
+    if (urlField != '') {
+        if (urlField.includes("http")) {
+            urlOrigin += ("https://" + urlField.split("//")[1]);
+        } else {
+            urlOrigin += ("https://" + urlField);
+        }
+    } else {
+        urlOrigin += window.location.origin;
+    }
+    urlOrigin += "/";
+
+    tg.DeviceStorage.setItem("serverURL", urlOrigin);
     window.location.href = '/';
 }
 
