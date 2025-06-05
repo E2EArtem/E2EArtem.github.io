@@ -1,4 +1,4 @@
-const tg = window.Telegram.WebApp;
+//const tg = window.Telegram.WebApp;
 
 
 tg.BackButton.onClick(() => {
@@ -14,30 +14,8 @@ tg.MainButton.onClick(() => {
 })
 tg.MainButton.show();
 
-tg.SecondaryButton.setText("На доработку");
-tg.SecondaryButton.onClick(() => {
-    showConfirm("Отправить на доработку?", (shure) => {
-        if (shure) {
-            window.location.href = '/index.html';
-        }
-    });
-});
-tg.SecondaryButton.position = "left";
-tg.SecondaryButton.show();
+//let docUIN;
 
-
-function getValue(key) {
-    return new Promise((resolve, reject) => {
-        tg.DeviceStorage.getItem(key, (error, value) => {
-            if (error != null) {
-                showAlert("Ошибка ", error);
-                reject(error);
-                return;
-            }
-            resolve(value);
-        });
-    });
-}
 
 
 getValue('openDoc')
@@ -64,8 +42,10 @@ getValue('openDoc')
             if (jsValue.SummaNDS == 0) {
                 document.getElementById('spanNDS').innerHTML = "";
             }
-            
-            
+            /*
+            docUIN = jsValue.UIN;
+            tg.SecondaryButton.onClick(SBC);
+            */
             //outputString = `СЗ № ${jsValue.PolnyNomer}<br>От ${jsValue.Data}<br>Организация ${jsValue.OrgName}<br>Сумма: ${jsValue.Summa}`
             //document.getElementById('DinamicContainer').innerHTML = outputString;
         }
@@ -74,6 +54,12 @@ getValue('openDoc')
         //showAlert("Ошибка ", error);
     });
 
-function SBC() {
-    
-}
+
+tg.SecondaryButton.setText("На доработку");
+tg.SecondaryButton.onClick(() => {
+    window.location.href = 'rework/rework.html';
+});
+tg.SecondaryButton.position = "left";
+tg.SecondaryButton.show();
+
+

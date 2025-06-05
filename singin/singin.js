@@ -1,4 +1,4 @@
-const tg = window.Telegram.WebApp;
+//const tg = window.Telegram.WebApp;
 
 tg.MainButton.onClick(MBC);
 tg.MainButton.setText("Войти");
@@ -17,18 +17,7 @@ tg.BackButton.onClick(() => {
 
 
 
-function getValue(key) {
-    return new Promise((resolve, reject) => {
-        tg.DeviceStorage.getItem(key, (error, value) => {
-            if (error != null) {
-                tg.showAlert("Ошибка ", error);
-                reject(error);
-                return;
-            }
-            resolve(value);
-        });
-    });
-}
+
 
 document.getElementById('loginField').addEventListener('input', function () {
     const loginField = this.value.trim(); // убираем пробелы в начале и конце
@@ -60,11 +49,13 @@ document.getElementById('passField').addEventListener('input', function () {
 function MBC() {
     let username = document.getElementById('loginField').value;
     let password = document.getElementById('passField').value;
-    const url = "https://rd.novpt.ru/2022/hs/sz/GetAllDirector";
+    let url = "https://rd.novpt.ru/2022/hs/sz/user/" + username;
+
 
     // Формирование строки авторизации в формате "username:password" в Base64
-    let token = btoa(`${username}:${password}`);
-
+    //let token = btoa(`${username}:${password}`);
+    let token = btoa(unescape(encodeURIComponent(`${username}:${password}`)));
+    
     fetch(url, {
         method: "GET",
         credentials: "include",
@@ -75,7 +66,6 @@ function MBC() {
         .then(response => {
             if (response.ok) {
                 tg.DeviceStorage.setItem("credentials", token);
-                window.location.href = '/';
             } else {
                 throw new Error(`Ошибка HTTP: ${response.status}`);
             }
@@ -84,11 +74,19 @@ function MBC() {
         })
         .then(data => {
             console.log("Данные получены");
+            if (data[0].UIN) {
+                tg.DeviceStorage.setItem("UserUIN", data[0].UIN);
+                window.location.href = '/';
+            } else {
+                tg.showAlert("Доступ отклонен, обратитесь к администратору");
+            }
         })
         .catch(error => {
             console.error("Ошибка qwe:", error);
             tg.showAlert("Неверный логин или пароль");
         });
+
+    console.log("qwe");
 }
 
 

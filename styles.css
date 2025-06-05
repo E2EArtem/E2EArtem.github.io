@@ -60,6 +60,22 @@ input {
         border-color: var(--tg-theme-secondary-bg-color);
     }
 
+textarea {
+    outline: none;
+    border-radius: 5px;
+    border: 2px solid var(--tg-theme-button-color);
+    padding: 15px 10px;
+    margin: 10px 0 0;
+    background: var(--tg-theme-section-separator-color);
+    color: var(--tg-theme-text-color);
+    transition: all .2s;
+    width: 100%;
+}
+
+    textarea:focus {
+        border-color: var(--tg-theme-secondary-bg-color);
+    }
+
 a[name="toDocButton"] {
     cursor: pointer;
 }
