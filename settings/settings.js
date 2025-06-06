@@ -66,10 +66,34 @@ getValue('biometricEnable')
 
 document.getElementById('toggle').addEventListener('change', function () {
     if (this.checked) {
-        window.location.href = 'biometric/biometric.html';
+
+        if (tg.BiometricManager.isInited) {
+            if (tg.BiometricManager.isBiometricAvailable) {
+                window.location.href = 'biometric/biometric.html';
+            } else {
+                tg.showAlert("Биометрия недоступна на данном устройстве")
+                document.getElementById('toggle').checked = false;
+            }
+        } else { 
+            tg.BiometricManager.init(() => {
+                if (tg.BiometricManager.isBiometricAvailable) {
+                    window.location.href = 'biometric/biometric.html';
+                } else {
+                    tg.showAlert("Биометрия недоступна на данном устройстве")
+                    document.getElementById('toggle').checked = false;
+                }
+            });
+        }
+
+        
+        
     } else {
         tg.SecureStorage.removeItem("ECP");
         tg.DeviceStorage.setItem("biometricEnable", "false");
     }
     //console.log("Состояние переключателя: ", this.checked ? "Включено" : "Выключено");
 });
+
+setTimeout(() => {
+    document.getElementById('urlField').value = serverURL;
+}, 500); // пол секунды

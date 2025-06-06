@@ -42,16 +42,16 @@ getValue('openDoc')
                 fetch(url, options)
                     .then(response => {
                         if (!response.ok) {
-                            throw new Error(`Ошибка HTTP: ${response.status}`);
-                        }
-                        // В зависимости от возвращаемых данных можно выбрать response.json() или response.text()
-                        console.log(response);
-                        //window.location.href = '/index.html';
-                    })
-                    .then(data => {
-                        console.log("Результат запроса:", data);
+                            tg.showAlert("Ошибка обработки запроса");
+                        } 
                         window.location.href = '/index.html';
                     })
+                    .catch(error => {
+                        tg.showAlert("Ошибка обработки запроса");
+                        console.error("Ошибка запроса:", error);
+                        window.location.href = '/index.html';
+                    });
+                //window.location.href = '/index.html';
             })
             tg.MainButton.enable();
             tg.MainButton.color = tg.themeParams.button_color;

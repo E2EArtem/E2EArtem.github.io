@@ -4,6 +4,10 @@ tg.MainButton.disable();
 tg.MainButton.color = tg.themeParams.hint_color;
 tg.MainButton.show();
 tg.BiometricManager.init();
+tg.BackButton.onClick(() => {
+    window.location.href = '/settings/settings.html';
+});
+tg.BackButton.show();
 
 
 document.getElementById('passField').addEventListener('input', function () {

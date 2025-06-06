@@ -45,7 +45,14 @@ getValue('credentials')
             credentials = value;
         } else {
             console.log("Вы не авторизированны!");
-            window.location.href = '/singin/singin.html';
+            switch (window.location.href) {
+                case (window.location.origin + '/singin/singin.html'):
+                    break;
+                case (window.location.origin + '/settings/settings.html'):
+                    break;
+                default:
+                //window.location.href = '/singin/singin.html';
+            }
         }
     })
     .catch((error) => {
@@ -59,9 +66,13 @@ getValue('UserUIN')
             UserUIN = value;
         } else {
             console.log("Вы не авторизированны!");
-            let isAcsessPage = (window.location.href != (window.location.origin + '/singin/singin.html')) && (window.location.href != (window.location.origin + '/settings/settings.html'))
-            if (isAcsessPage)  {
-                window.location.href = '/singin/singin.html';
+            switch (window.location.href) {
+                case (window.location.origin + '/singin/singin.html'):
+                    break;
+                case (window.location.origin + '/settings/settings.html'):
+                    break;
+                default:
+                //window.location.href = '/singin/singin.html';
             }
         }
     })
@@ -76,10 +87,15 @@ getValue('serverURL')
             serverURL = value;
         } else {
             console.log("Вы не авторизированны!");
-            let isAcsessPage = (window.location.href != (window.location.origin + '/singin/singin.html')) && (window.location.href != (window.location.origin + '/settings/settings.html'))
-            if (isAcsessPage) {
-                window.location.href = '/singin/singin.html';
+            switch (window.location.href) {
+                case (window.location.origin + '/singin/singin.html'):
+                    break;
+                case (window.location.origin + '/settings/settings.html'):
+                    break;
+                default:
+                    //window.location.href = '/singin/singin.html';
             }
+
         }
     })
     .catch((error) => {
