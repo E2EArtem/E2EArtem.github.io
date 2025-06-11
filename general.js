@@ -51,7 +51,7 @@ getValue('credentials')
                 case (window.location.origin + '/settings/settings.html'):
                     break;
                 default:
-                //window.location.href = '/singin/singin.html';
+                window.location.href = '/singin/singin.html';
             }
         }
     })
@@ -72,7 +72,7 @@ getValue('UserUIN')
                 case (window.location.origin + '/settings/settings.html'):
                     break;
                 default:
-                //window.location.href = '/singin/singin.html';
+                window.location.href = '/singin/singin.html';
             }
         }
     })
@@ -93,7 +93,7 @@ getValue('serverURL')
                 case (window.location.origin + '/settings/settings.html'):
                     break;
                 default:
-                    //window.location.href = '/singin/singin.html';
+                    window.location.href = '/singin/singin.html';
             }
 
         }
