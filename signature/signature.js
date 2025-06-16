@@ -116,7 +116,7 @@ function MBC(isBiometric) {
         //UserID/SzUIN/Пароль который вводит при подписании СЗ"
 
         if (isBiometric) {
-            let url = "https://rd.novpt.ru/2022/hs/sz/sign/" + UserUIN.toString() + "/" + doc.UIN.toString() + "/123" ;
+            let url = serverURL + "npt2022/hs/sz/sign/" + UserUIN.toString() + "/" + doc.UIN.toString() + "/123" ;
             doFetch(url);
         } else {
             
@@ -129,7 +129,7 @@ function MBC(isBiometric) {
 
 
 function passSignature() {
-    let url = serverURL + "2022/hs/sz/sign/" + UserUIN.toString() + "/" + doc.UIN.toString() + "/" + document.getElementById('passField').value.toString().trim();
+    let url = serverURL + "npt2022/hs/sz/sign/" + UserUIN.toString() + "/" + doc.UIN.toString() + "/" + document.getElementById('passField').value.toString().trim();
     doFetch(url);
     tg.MainButton.hide();
     tg.SecondaryButton.onClick(() => {
@@ -149,7 +149,7 @@ function passBiometric() {
                 getSecureValue('ECP')
                     .then((value) => {
                         if ((value != null) || (value != undefined)) {
-                            let url = serverURL + "2022/hs/sz/sign/" + UserUIN.toString() + "/" + doc.UIN.toString() + "/" + value.toString().trim();
+                            let url = serverURL + "npt2022/hs/sz/sign/" + UserUIN.toString() + "/" + doc.UIN.toString() + "/" + value.toString().trim();
                             doFetch(url);
                             tg.MainButton.hide();
                             tg.SecondaryButton.onClick(() => {
