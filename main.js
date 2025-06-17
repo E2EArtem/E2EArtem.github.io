@@ -115,7 +115,7 @@ function dateExpiredCheck(tagetDataString) {
 
     tdm = tagetDataString.split('.');
     
-    const targetData = new Date(parseInt(tdm[2]), parseInt(tdm[1])-1, parseInt(tdm[0])); 
+    const targetData = new Date(parseInt(tdm[2]), parseInt(tdm[1])-1, parseInt(tdm[0])+1); 
 
     const currentDate = new Date();
 
