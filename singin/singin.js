@@ -31,7 +31,8 @@ function checkNecessaryFields (inputElementsArray){
     }
 }
 
-document.getElementsByTagName('input').forEach((element) => {
+
+document.querySelectorAll('input').forEach((element) => {
     element.addEventListener('input', checkNecessaryFields );
 })
 
