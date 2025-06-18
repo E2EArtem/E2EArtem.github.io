@@ -24,7 +24,7 @@ function getValue(key) {
         });
     });
 }
-
+/*
 async function getValueAsync(key) {
     try {
         const value = await getValueAsync(key);
@@ -49,6 +49,7 @@ async function getValueAsync(key) {
         // При желании можно ещё делать редирект или другую логику
     }
 }
+*/
 
 function getSecureValue(key) {
     return new Promise((resolve, reject) => {
@@ -63,7 +64,7 @@ function getSecureValue(key) {
     });
 }
 
-/*
+
 getValue('credentials')
     .then((value) => {
         if (value != null) {
@@ -84,9 +85,7 @@ getValue('credentials')
     .catch((error) => {
         console.log("Вы не авторизированны!", error);
     });
-    */
-credentials = getValueAsync('credentials');
-
+  
 
 getValue('UserUIN')
     .then((value) => {
