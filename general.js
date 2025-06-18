@@ -25,6 +25,17 @@ function getValue(key) {
     });
 }
 
+function newGetValue(key) {
+    tg.DeviceStorage.getItem(key, (error, value) => {
+        if (error != null) {
+            tg.showAlert("Ошибка ", error);
+            reject(error);
+            return;
+        }
+        return value;
+    });
+}
+
 function getSecureValue(key) {
     return new Promise((resolve, reject) => {
         tg.SecureStorage.getItem(key, (error, value) => {
@@ -38,7 +49,7 @@ function getSecureValue(key) {
     });
 }
 
-
+/*
 getValue('credentials')
     .then((value) => {
         if (value != null) {
@@ -59,6 +70,9 @@ getValue('credentials')
     .catch((error) => {
         console.log("Вы не авторизированны!", error);
     });
+    */
+credentials = newGetValue('credentials');
+
 
 getValue('UserUIN')
     .then((value) => {
