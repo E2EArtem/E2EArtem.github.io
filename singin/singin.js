@@ -6,8 +6,6 @@ tg.MainButton.disable();
 tg.MainButton.color = tg.themeParams.hint_color;
 tg.MainButton.show();
 
-
-
 tg.BackButton.onClick(() => {
     tg.BackButton.hide();
     //tg.DeviceStorage.removeItem("openDoc");
@@ -15,10 +13,32 @@ tg.BackButton.onClick(() => {
 });
 
 
+var loginField = document.getElementById('loginField');
+var passField = document.getElementById('passField');
+var publishField = document.getElementById('publishField');
+var urlField = document.getElementById('urlField');
+
+var necessaryFields = [loginField, passField, publishField]
+
+function checkNecessaryFields (inputElementsArray){
+    if ( inputElementsArray.every(element => element.value.trim() != "") ){
+        tg.MainButton.enable();
+        tg.MainButton.color = tg.themeParams.button_color;
+        tg.MainButton.hasShineEffect = true;
+    } else {
+        tg.MainButton.disable();
+        tg.MainButton.color = tg.themeParams.hint_color;
+    }
+}
+
+document.getElementsByTagName('input').forEach((element) => {
+    element.addEventListener('input', checkNecessaryFields );
+})
 
 
 
 
+/*
 document.getElementById('loginField').addEventListener('input', function () {
     const loginField = this.value.trim(); // убираем пробелы в начале и конце
     const passField = document.getElementById('passField').value.trim();;
@@ -45,6 +65,7 @@ document.getElementById('passField').addEventListener('input', function () {
         tg.MainButton.color = tg.themeParams.hint_color;
     }
 });
+*/
 
 function MBC() {
     let username = document.getElementById('loginField').value;
