@@ -25,15 +25,29 @@ function getValue(key) {
     });
 }
 
-function newGetValue(key) {
-    tg.DeviceStorage.getItem(key, (error, value) => {
-        if (error != null) {
-            tg.showAlert("Ошибка ", error);
-            reject(error);
-            return;
+async function getValueAsync(key) {
+    try {
+        const value = await getValueAsync(key);
+
+        if (value != null) {
+            console.log("Вы авторизированны");
+            return value;
+        } else {
+            console.log("Вы не авторизированны!");
+            const href = window.location.href;
+            const origin = window.location.origin;
+            // Если мы не на страницах /singin или /settings — редиректим
+            if (
+                href !== `${origin}/singin/singin.html` &&
+                href !== `${origin}/settings/settings.html`
+            ) {
+                window.location.href = '/singin/singin.html';
+            }
         }
-        return value;
-    });
+    } catch (error) {
+        console.log("Вы не авторизированны!", error);
+        // При желании можно ещё делать редирект или другую логику
+    }
 }
 
 function getSecureValue(key) {
@@ -71,7 +85,7 @@ getValue('credentials')
         console.log("Вы не авторизированны!", error);
     });
     */
-credentials = newGetValue('credentials');
+credentials = getValueAsync('credentials');
 
 
 getValue('UserUIN')
