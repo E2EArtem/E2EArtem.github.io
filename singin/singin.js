@@ -50,6 +50,8 @@ function MBC() {
     let username = document.getElementById('loginField').value;
     let password = document.getElementById('passField').value;
 
+    // Добавляем слэш после имени публикации
+    publishNAME = document.getElementById('publishField').value.toString().trim() + "/";
     let urlOrigin = '';  
     let urlField = document.getElementById('urlField').value
 
@@ -92,6 +94,7 @@ function MBC() {
             if (data[0].UIN) {
                 tg.DeviceStorage.setItem("UserUIN", data[0].UIN);
                 tg.DeviceStorage.setItem("serverURL", urlOrigin);
+                tg.DeviceStorage.setItem("publishNAME", publishNAME);
                 window.location.href = '/';
             } else {
                 tg.showAlert("Доступ отклонен, обратитесь к администратору");
