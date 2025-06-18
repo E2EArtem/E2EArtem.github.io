@@ -29,6 +29,8 @@ tg.MainButton.setText("Применить изменения");
 tg.MainButton.show();
 
 function MBC() {
+
+    // Обновление адреса сервера
     let urlOrigin = '';
     let urlField = document.getElementById('urlField').value
 
@@ -44,7 +46,14 @@ function MBC() {
     urlOrigin += "/";
 
     tg.DeviceStorage.setItem("serverURL", urlOrigin);
-    window.location.href = '/';
+
+    //Обновление имени публтикации
+    tg.DeviceStorage.setItem("publishNAME", document.getElementById('publishField').value);
+
+    setTimeout(() => {
+        window.location.href = '/';
+    }, 500); // пол секунды
+    
 }
 
 
@@ -96,4 +105,5 @@ document.getElementById('toggle').addEventListener('change', function () {
 
 setTimeout(() => {
     document.getElementById('urlField').value = serverURL;
+    document.getElementById('publishField').value = publishNAME;
 }, 500); // пол секунды
