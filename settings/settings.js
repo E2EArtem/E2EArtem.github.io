@@ -49,7 +49,7 @@ function MBC() {
 
     //Обновление имени публтикации
     publishField = document.getElementById('publishField').value
-    if publishField.endsWith("/"){
+    if (publishField.endsWith("/")){
         publishField = publishField.trim()
     } else {
         publishField = publishField.trim() + "/";
