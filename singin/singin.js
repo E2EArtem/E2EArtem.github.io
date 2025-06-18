@@ -21,7 +21,7 @@ var urlField = document.getElementById('urlField');
 var necessaryFields = [loginField, passField, publishField]
 
 function checkNecessaryFields (inputElementsArray){
-    if ( inputElementsArray.every(element => element.value.trim() != "") ){
+    if ( necessaryFields.every(element => element.value.trim() != "") ){
         tg.MainButton.enable();
         tg.MainButton.color = tg.themeParams.button_color;
         tg.MainButton.hasShineEffect = true;
