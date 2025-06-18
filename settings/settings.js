@@ -48,7 +48,14 @@ function MBC() {
     tg.DeviceStorage.setItem("serverURL", urlOrigin);
 
     //Обновление имени публтикации
-    tg.DeviceStorage.setItem("publishNAME", document.getElementById('publishField').value);
+    publishField = document.getElementById('publishField').value
+    if publishField.endsWith("/"){
+        publishField = publishField.trim()
+    } else {
+        publishField = publishField.trim() + "/";
+    }
+
+    tg.DeviceStorage.setItem("publishNAME", publishField);
 
     setTimeout(() => {
         window.location.href = '/';
@@ -105,5 +112,5 @@ document.getElementById('toggle').addEventListener('change', function () {
 
 setTimeout(() => {
     document.getElementById('urlField').value = serverURL;
-    document.getElementById('publishField').value = publishNAME;
+    document.getElementById('publishField').value = publishNAME.slice(0, -1);
 }, 500); // пол секунды
