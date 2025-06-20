@@ -1,0 +1,10 @@
+﻿################################################################################
+# Данный GITIGNORE-файл был автоматически создан Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/.vs/E2EArtem.github.io/v17/.wsuo
+/.vs/E2EArtem.github.io/v17/DocumentLayout.backup.json
+/.vs/E2EArtem.github.io/v17/DocumentLayout.json
+/.vs/VSWorkspaceState.json
+/.vs/slnx.sqlite
