@@ -143,7 +143,7 @@ function doFetch(signatureData) {
             "Authorization": `Basic ${credentials}`,
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(commentData)
+        body: JSON.stringify(signatureData)
     })
         .then(response => {
             if (!response.ok) {
