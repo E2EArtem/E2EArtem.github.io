@@ -79,6 +79,7 @@ document.getElementById('passField').addEventListener('input', function () {
 
 function passSignature() {
     
+    /*
     let signData = {
         UserID: UserUIN,
         SzID: doc.UIN,
@@ -86,6 +87,10 @@ function passSignature() {
     };
     
     doFetch(signData);
+    */
+
+    doFetch( (UserUIN.toString() + "/" + doc.UIN.toString() + "/" + document.getElementById('passField').value.toString().trim()) );
+
     tg.MainButton.hide();
     tg.SecondaryButton.onClick(() => {
         window.location.href = '/index.html';
@@ -105,12 +110,15 @@ function passBiometric() {
                     .then((value) => {
                         if ((value != null) || (value != undefined)) {
                             
+                            /*
                             let signData = {
                                 UserID: UserUIN,
                                 SzID: doc.UIN,
                                 Pass: value.toString().trim()
                             };
                             doFetch(signData);
+                            */
+                            doFetch( (UserUIN.toString() + "/" + doc.UIN.toString() + "/" + value.toString().trim()) );
                             tg.MainButton.hide();
                             tg.SecondaryButton.onClick(() => {
                                 window.location.href = '/index.html';
@@ -133,17 +141,17 @@ function passBiometric() {
 
 
 
-function doFetch(signatureData) {
-    let modUrl = serverURL + publishNAME + "hs/sz/sign"
+function doFetch(/*signatureData*/ urlAddString) {
+    let modUrl = serverURL + publishNAME + "hs/sz/sign" + "/" + urlAddString;
     fetch(modUrl, {
         
-        method: "POST",
+        method: "GET", //"POST",
         credentials: "include",
         headers: {
-            "Authorization": `Basic ${credentials}`,
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(signatureData)
+            "Authorization": `Basic ${credentials}`//,
+            //"Content-Type": "application/json"
+        }//,
+        //body: JSON.stringify(signatureData)
     })
         .then(response => {
             if (!response.ok) {
