@@ -141,16 +141,15 @@ function passBiometric() {
 
 
 
-function doFetch(/*signatureData*/ urlAddString) {
-    let modUrl = serverURL + publishNAME + "hs/sz/sign" + "/" + AddString;
+function doFetch(urlAddString) {
+    let modUrl = serverURL + publishNAME + "hs/sz/sign" + "/" + urlAddString;
     fetch(modUrl, {
         
-        method: "GET", //"POST",
+        method: "GET", 
         credentials: "include",
         headers: {
-            "Authorization": `Basic ${credentials}`//,
-            //"Content-Type": "application/json"
-        }//,
+            "Authorization": `Basic ${credentials}`
+        }
         //body: JSON.stringify(signatureData)
     })
         .then(response => {
