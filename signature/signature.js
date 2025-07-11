@@ -222,7 +222,8 @@ getValue('biometricEnable')
                 console.log("Применяется подпись паролем");
             }
         } else {
-            console.log("Данных нет");
+            tg.MainButton.onClick(passSignature);
+            console.log("Применяется подпись паролем");
         }
     })
     .catch((error) => {
