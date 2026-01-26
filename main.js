@@ -59,8 +59,13 @@ function SBC() {
 function showDocList(data) {
     document.getElementById('DinamicContainer').innerHTML = ""
     let htmlAddString = "";
-    data.forEach((doc) => {
-
+    if (!Array.isArray(data) || data.length === 0) {
+        htmlAddString += `<div class="section">
+        	          <div>Отсутствуют сз к утверждению</div>
+                          </div>`;
+    }
+    else {
+	    data.forEach((doc) => {
         if (dateExpiredCheck(doc.DataOplaty)) {
             htmlAddString += `  <a id="${doc.UIN}" name="toDocButton" style="color: ${tg.themeParams.destructive_text_color}" >
                             <div class="section">
@@ -68,17 +73,16 @@ function showDocList(data) {
                             </div>
                         </a>         `;
         } else {
-            htmlAddString += `  <a id="${doc.UIN}" name="toDocButton" >
-                            <div class="section">
-                                <div>${doc.OrgName}<br>СЗ № ${doc.PolnyNomer} от ${doc.Data}<br>сумма ${doc.Summa} ${doc.Valuta}</div>
-                            </div>
-                        </a>         `;
-        }
+                htmlAddString += `  <a id="${doc.UIN}" name="toDocButton" >
+                                <div class="section">
+                                    <div>${doc.OrgName}<br>СЗ № ${doc.PolnyNomer} от ${doc.Data}<br>сумма ${doc.Summa} ${doc.Valuta}</div>
+                                </div>
+                            </a>         `;
+            }
+        })
 
-        
+    }
 
-        
-    })
     document.getElementById('DinamicContainer').innerHTML = htmlAddString;
     document.getElementsByName("toDocButton").forEach((obj) => {
         obj.addEventListener('click', toDoc);
@@ -125,3 +129,4 @@ function dateExpiredCheck(tagetDataString) {
     } 
     return true;
 }
+
