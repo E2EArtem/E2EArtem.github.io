@@ -24,19 +24,16 @@ function getValue(key) {
 
 
 function getSecureValue(key) {
-    var promise
-    window.WebApp.SecureStorage.getItem(key).then((result) => {
-        promise = result // {key: 'secureStorageEntryKey', value: 'some value'}
-    });
-    return promise[1]
-}
+     return window.WebApp.SecureStorage.getItem(key).then(result => result.value);
+ }
 
-credentials = getSecureValue('credentials')
-if (credentials != 0) {
-    console.log("Вы авторизированны");
-} else {
-    console.log("Вы не авторизированны!");
-}
+getSecureValue('credentials').then(value => {
+     if (value != null) {
+         console.log("Вы авторизированны");
+     } else {
+        console.log("Вы не авторизированны!");
+     }
+});
 
 
 /*
