@@ -1,10 +1,12 @@
 //const tg = window.Telegram.WebApp;
+/*
 tg.SecondaryButton.onClick(SBC);
 tg.SecondaryButton.setText("Обновить список документов");
 tg.SecondaryButton.show();
-tg.BackButton.hide();
+*/
+max.BackButton.hide();
 
-
+/*
 
 var docList;
 
@@ -130,3 +132,4 @@ function dateExpiredCheck(tagetDataString) {
     return true;
 }
 
+*/
