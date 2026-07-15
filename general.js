@@ -14,7 +14,7 @@ tg.SettingsButton.show();
 */
 
 function getValue(key) {
-    max.DeviceStorage.getItem(getKey).then((result) => {
+    max.DeviceStorage.getItem(key).then((result) => {
         return result[1] // result {key: 'storageEntryKey', value: 'some value'}
     });
 }
@@ -22,7 +22,7 @@ function getValue(key) {
 
 
 function getSecureValue(key) {
-    window.WebApp.SecureStorage.getItem(getKey).then((result) => {
+    window.WebApp.SecureStorage.getItem(key).then((result) => {
         return result[1] // {key: 'secureStorageEntryKey', value: 'some value'}
     });
 }
