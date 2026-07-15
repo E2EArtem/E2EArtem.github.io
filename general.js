@@ -14,17 +14,21 @@ tg.SettingsButton.show();
 */
 
 function getValue(key) {
+    var promise
     max.DeviceStorage.getItem(key).then((result) => {
-        return result[1] // result {key: 'storageEntryKey', value: 'some value'}
+        promise = result // result {key: 'storageEntryKey', value: 'some value'}
     });
+    return promise[1]
 }
 
 
 
 function getSecureValue(key) {
+    var promise
     window.WebApp.SecureStorage.getItem(key).then((result) => {
-        return result[1] // {key: 'secureStorageEntryKey', value: 'some value'}
+        promise = result // {key: 'secureStorageEntryKey', value: 'some value'}
     });
+    return promise[1]
 }
 
 credentials = getSecureValue('credentials')
