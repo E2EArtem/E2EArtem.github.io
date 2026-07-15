@@ -35,7 +35,7 @@ getSecureValue('credentials').then(value => {
      }
 });*/
 
-window.WebApp.SecureStorage.getItem('credentials').then((result) => {
+window.WebApp.DeviceStorage.getItem('credentials').then((result) => {
     console.log(result) // {key: 'secureStorageEntryKey', value: 'some value'}
 });
 
