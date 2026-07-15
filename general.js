@@ -12,7 +12,7 @@ tg.SettingsButton.onClick(() => {
 });
 tg.SettingsButton.show();
 */
-
+/*
 function getValue(key) {
     var promise
     max.DeviceStorage.getItem(key).then((result) => {
@@ -33,6 +33,10 @@ getSecureValue('credentials').then(value => {
      } else {
         console.log("Вы не авторизированны!");
      }
+});*/
+
+window.WebApp.SecureStorage.getItem('credentials').then((result) => {
+    console.log(result) // {key: 'secureStorageEntryKey', value: 'some value'}
 });
 
 
